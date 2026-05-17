@@ -1,563 +1,788 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A&amp;S Gebäudetechnik</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --anthracite: #1e2022;
-      --warm-dark: #2c2418;
-      --copper: #b8642a;
-      --copper-light: #d4824a;
-      --cream: #f5f0e8;
-      --warm-white: #faf7f2;
-      --text: #2c2418;
-      --text-muted: #6b5f52;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Source Sans 3', sans-serif;
-      background: var(--warm-white);
-      color: var(--text);
-      font-size: 17px;
-      line-height: 1.7;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>A&S Gebäudetechnik GmbH – Heizung, Sanitär & Gebäudetechnik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1a3a5c;
+  --blue-mid:#2d5986;
+  --blue-light:#e8f0f9;
+  --orange:#e8621a;
+  --orange-light:#f07840;
+  --gray:#f5f6f8;
+  --gray-mid:#e2e6ea;
+  --text:#1a1a2e;
+  --text-mid:#4a5568;
+  --text-light:#718096;
+  --white:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;font-size:16px;line-height:1.7;overflow-x:hidden}
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; width: 100%; z-index: 200;
-      background: var(--anthracite);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2.5rem;
-      height: 64px;
-      border-bottom: 3px solid var(--copper);
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem; color: var(--cream);
-      cursor: pointer; letter-spacing: 0.02em; flex-shrink: 0;
-    }
-    .nav-logo span { color: var(--copper-light); }
-    nav ul { list-style: none; display: flex; gap: 0; }
-    nav ul li a {
-      display: block;
-      padding: 0 1.1rem; height: 64px; line-height: 64px;
-      color: #bbb; text-decoration: none;
-      font-size: 0.82rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      transition: color 0.2s; white-space: nowrap;
-    }
-    nav ul li a:hover { color: var(--copper-light); }
-    nav ul li a.active {
-      color: #fff;
-      border-bottom: 3px solid var(--copper-light);
-      margin-bottom: -3px;
-    }
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; padding: 4px;
-    }
-    .hamburger span { display: block; width: 24px; height: 2px; background: #ccc; }
-    .mobile-menu {
-      display: none; position: fixed;
-      top: 64px; left: 0; right: 0;
-      background: var(--anthracite);
-      border-bottom: 3px solid var(--copper);
-      z-index: 190; flex-direction: column;
-    }
-    .mobile-menu a {
-      padding: 1rem 2rem; color: #ccc; text-decoration: none;
-      font-size: 0.9rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      border-top: 1px solid rgba(255,255,255,0.06); display: block;
-    }
-    .mobile-menu a.active { color: var(--copper-light); }
-    .mobile-menu.open { display: flex; }
+/* ═══ COOKIE BANNER ═══ */
+.cookie-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.cookie-box{
+  background:#fff;max-width:900px;width:100%;padding:2rem 2.5rem;
+  border-top:4px solid var(--orange);
+  box-shadow:0 -8px 40px rgba(0,0,0,0.15);
+}
+.cookie-box h3{font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;color:var(--blue)}
+.cookie-box p{font-size:0.88rem;color:var(--text-mid);margin-bottom:1.2rem;line-height:1.6}
+.cookie-box p a{color:var(--orange);text-decoration:none}
+.cookie-actions{display:flex;gap:0.8rem;flex-wrap:wrap}
+.cookie-btn{
+  padding:0.7em 1.6em;font-size:0.85rem;font-weight:600;cursor:pointer;
+  border:none;font-family:'Inter',sans-serif;letter-spacing:0.04em;transition:all 0.2s;
+}
+.cookie-accept{background:var(--orange);color:#fff}
+.cookie-accept:hover{background:var(--orange-light)}
+.cookie-essential{background:transparent;border:2px solid var(--gray-mid);color:var(--text-mid)}
+.cookie-essential:hover{border-color:var(--blue);color:var(--blue)}
+.cookie-link{background:none;border:none;color:var(--text-light);font-size:0.8rem;cursor:pointer;text-decoration:underline;padding:0.7em 0}
 
-    /* ── PAGES ── */
-    .page { display: none; margin-top: 64px; }
-    .page.active { display: block; animation: fadeIn 0.25s ease; }
-    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+/* ═══ NAV ═══ */
+nav{
+  position:fixed;top:0;width:100%;z-index:500;
+  background:rgba(255,255,255,0.97);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--gray-mid);
+  transition:box-shadow 0.3s;
+}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1)}
+.nav-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;height:70px;
+}
+.nav-logo{display:flex;flex-direction:column;line-height:1.1;cursor:pointer;text-decoration:none}
+.nav-logo-main{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--blue)}
+.nav-logo-main span{color:var(--orange)}
+.nav-logo-sub{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);font-weight:500}
+.nav-links{display:flex;list-style:none;gap:0}
+.nav-links a{
+  display:block;padding:0 1rem;height:70px;line-height:70px;
+  font-size:0.82rem;font-weight:600;letter-spacing:0.05em;
+  text-transform:uppercase;color:var(--text-mid);text-decoration:none;
+  position:relative;transition:color 0.2s;white-space:nowrap;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:1rem;right:1rem;height:3px;
+  background:var(--orange);transform:scaleX(0);transition:transform 0.2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--blue)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-phone{
+  font-size:0.82rem;font-weight:700;color:var(--blue);
+  display:flex;align-items:center;gap:0.4rem;
+}
+.nav-phone .ph-icon{color:var(--orange);font-size:1rem}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--blue);transition:all 0.3s}
+.mobile-menu{
+  display:none;position:fixed;
+  top:70px;left:0;right:0;
+  background:#fff;border-bottom:3px solid var(--orange);
+  z-index:490;flex-direction:column;
+  box-shadow:0 8px 24px rgba(0,0,0,0.12);
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  padding:1rem 2rem;color:var(--text-mid);text-decoration:none;
+  font-size:0.88rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
+  border-top:1px solid var(--gray);display:block;transition:color 0.2s;
+}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--orange)}
+.mobile-menu .mobile-phone{padding:1rem 2rem;background:var(--blue);color:#fff;font-weight:700;font-size:0.9rem}
 
-    /* ── SHARED ── */
-    section { padding: 5rem 2.5rem; }
-    .container { max-width: 1100px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--copper); margin-bottom: 0.5rem;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      color: var(--warm-dark); margin-bottom: 0.9rem;
-    }
-    .section-sub {
-      color: var(--text-muted); max-width: 560px;
-      font-weight: 300; margin-bottom: 3rem;
-    }
-    .btn {
-      display: inline-block; background: var(--copper); color: #fff;
-      padding: 0.9em 2.2em; font-size: 0.92rem; font-weight: 600;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      text-decoration: none; cursor: pointer; border: none;
-      transition: background 0.2s, transform 0.15s;
-      font-family: 'Source Sans 3', sans-serif;
-    }
-    .btn:hover { background: var(--copper-light); transform: translateY(-2px); }
-    .btn-ghost {
-      background: transparent;
-      border: 2px solid rgba(255,255,255,0.45);
-      margin-left: 1rem;
-    }
-    .btn-ghost:hover { background: rgba(255,255,255,0.08); }
-    .btn-white { background: #fff; color: var(--copper); }
-    .btn-white:hover { background: var(--cream); }
+/* ═══ PAGES ═══ */
+.page{display:none;margin-top:70px}
+.page.active{display:block;animation:fadeUp 0.3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-    /* PAGE HEADER (subpages) */
-    .page-header {
-      padding: 5rem 2.5rem 4rem; text-align: center;
-      background: linear-gradient(155deg, rgba(30,32,34,0.88), rgba(44,36,24,0.78)),
-                  url('') center/cover no-repeat;
-    }
-    .page-header .section-label { color: var(--copper-light); }
-    .page-header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem); color: #fff; margin-bottom: 1rem;
-    }
-    .page-header p { color: rgba(255,255,255,0.7); font-weight: 300; max-width: 560px; margin: 0 auto; }
+/* ═══ SCROLL ANIMATIONS ═══ */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
 
-    /* CTA BANNER */
-    .cta-banner { background: var(--copper); padding: 3.5rem 2.5rem; text-align: center; }
-    .cta-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem,3vw,2.2rem); color: #fff; margin-bottom: 0.8rem; }
-    .cta-banner p { color: rgba(255,255,255,0.8); margin-bottom: 1.8rem; font-weight: 300; }
+/* ═══ SHARED ═══ */
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+.section-label{font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);margin-bottom:0.6rem;display:block}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--blue);line-height:1.25;margin-bottom:1rem}
+.section-sub{color:var(--text-mid);font-weight:300;font-size:1.05rem;max-width:580px;margin-bottom:2.5rem}
+.btn{
+  display:inline-block;padding:0.85em 2em;font-size:0.88rem;font-weight:600;
+  letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+  border:none;font-family:'Inter',sans-serif;transition:all 0.2s;
+}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-primary:hover{background:var(--orange-light);transform:translateY(-2px);box-shadow:0 6px 20px rgba(232,98,26,0.3)}
+.btn-outline{background:transparent;border:2px solid var(--blue);color:var(--blue)}
+.btn-outline:hover{background:var(--blue);color:#fff;transform:translateY(-2px)}
+.btn-white{background:#fff;color:var(--blue)}
+.btn-white:hover{background:var(--blue-light)}
+.btn-white-outline{background:transparent;border:2px solid rgba(255,255,255,0.6);color:#fff;margin-left:0.8rem}
+.btn-white-outline:hover{background:rgba(255,255,255,0.1)}
 
-    /* KONTAKT BAR */
-    .kontakt-bar { background: var(--copper); padding: 2.5rem; }
-    .kontakt-bar .container { display: flex; flex-wrap: wrap; gap: 2.5rem; align-items: center; justify-content: space-between; }
-    .kontakt-item { display: flex; align-items: center; gap: 0.8rem; }
-    .kontakt-item .k-icon { font-size: 1.4rem; }
-    .kontakt-item strong { display: block; color: #fff; font-size: 1rem; }
-    .kontakt-item span { color: rgba(255,255,255,0.65); font-size: 0.86rem; }
+/* PAGE HEADER */
+.page-header{
+  padding:5rem 2rem 4rem;text-align:center;
+  background:linear-gradient(160deg,rgba(26,58,92,0.9),rgba(45,89,134,0.85)),
+  url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80') center/cover no-repeat;
+}
+.page-header .section-label{color:rgba(255,255,255,0.7)}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:0.8rem}
+.page-header p{color:rgba(255,255,255,0.75);font-weight:300;font-size:1.05rem;max-width:560px;margin:0 auto}
 
-    /* FOOTER */
-    footer { background: var(--warm-dark); text-align: center; padding: 1.6rem; color: rgba(255,255,255,0.3); font-size: 0.82rem; }
-    footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
-    footer a:hover { color: var(--copper-light); }
+/* FOOTER */
+.site-footer{background:var(--blue);padding:3.5rem 2rem 0}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem}
+.footer-brand .nav-logo-main{color:#fff;font-size:1.3rem}
+.footer-brand .nav-logo-sub{color:rgba(255,255,255,0.4)}
+.footer-brand p{color:rgba(255,255,255,0.5);font-size:0.88rem;margin-top:1rem;line-height:1.7}
+.footer-col h4{color:#fff;font-size:0.8rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.2rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:0.6rem}
+.footer-col ul li a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.88rem;transition:color 0.2s}
+.footer-col ul li a:hover{color:var(--orange-light)}
+.footer-col ul li span{color:rgba(255,255,255,0.5);font-size:0.88rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding:1.2rem 0;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{color:rgba(255,255,255,0.3);font-size:0.8rem}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{color:rgba(255,255,255,0.35);text-decoration:none;font-size:0.8rem;transition:color 0.2s}
+.footer-bottom-links a:hover{color:var(--orange-light)}
 
-    /* ════ START PAGE ════ */
-    .hero {
-      min-height: 88vh;
-      background: linear-gradient(155deg, rgba(30,32,34,0.84), rgba(44,36,24,0.72)),
-                  url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80') center/cover no-repeat;
-      display: flex; align-items: center; padding: 5rem 2.5rem;
-      position: relative; overflow: hidden;
-    }
-    .hero::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
-      background: linear-gradient(to top, var(--warm-white), transparent);
-    }
-    .hero-badge {
-      display: inline-block; background: var(--copper); color: #fff;
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 0.35em 1em; margin-bottom: 1.4rem;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem,5vw,3.8rem); color: #fff; line-height: 1.15; margin-bottom: 1.2rem;
-    }
-    .hero h1 em { color: var(--copper-light); font-style: normal; }
-    .hero p { color: rgba(255,255,255,0.8); font-size: 1.1rem; font-weight: 300; max-width: 520px; margin-bottom: 2.2rem; }
+/* NOTDIENST BAR */
+.notdienst-top{background:var(--blue);padding:0.6rem 2rem;text-align:center}
+.notdienst-top p{color:rgba(255,255,255,0.8);font-size:0.8rem}
+.notdienst-top a{color:var(--orange-light);font-weight:700;text-decoration:none}
 
-    .usp-strip { background: var(--anthracite); padding: 2.2rem 2.5rem; }
-    .usp-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 1.5rem; }
-    .usp-item { display: flex; align-items: flex-start; gap: 1rem; }
-    .usp-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
-    .usp-item strong { display: block; color: #fff; font-size: 0.95rem; font-weight: 600; }
-    .usp-item span { color: rgba(255,255,255,0.45); font-size: 0.83rem; }
+/* ═══════════════════
+   START PAGE
+═══════════════════ */
+.hero{
+  min-height:90vh;
+  background:linear-gradient(155deg,rgba(26,58,92,0.88) 0%,rgba(45,89,134,0.7) 50%,rgba(26,58,92,0.6) 100%),
+  url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80') center/cover no-repeat;
+  display:flex;align-items:center;padding:6rem 2rem 4rem;
+  position:relative;overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:120px;
+  background:linear-gradient(to top,#fff,transparent);pointer-events:none;
+}
+.hero-content{max-width:640px;position:relative;z-index:1}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:rgba(232,98,26,0.2);border:1px solid rgba(232,98,26,0.4);
+  color:rgba(255,255,255,0.9);padding:0.4em 1em;
+  font-size:0.75rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+.hero-eyebrow::before{content:'●';color:var(--orange);font-size:0.5rem}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,5.5vw,4rem);color:#fff;line-height:1.15;margin-bottom:1.4rem;
+}
+.hero h1 em{color:var(--orange-light);font-style:normal;display:block}
+.hero-sub{color:rgba(255,255,255,0.8);font-size:1.1rem;font-weight:300;max-width:500px;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:0;flex-wrap:wrap;gap:0.8rem}
+.hero-stats{
+  display:flex;gap:2.5rem;margin-top:3.5rem;padding-top:2rem;
+  border-top:1px solid rgba(255,255,255,0.15);
+}
+.hero-stat strong{display:block;font-family:'Playfair Display',serif;font-size:2rem;color:#fff;line-height:1}
+.hero-stat span{font-size:0.8rem;color:rgba(255,255,255,0.55);letter-spacing:0.06em;text-transform:uppercase}
 
-    /* ════ LEISTUNGEN PAGE ════ */
-    .leistungen-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.5rem; }
-    .leistung-card {
-      background: var(--warm-white); border-left: 4px solid var(--copper);
-      padding: 1.8rem; transition: box-shadow 0.2s, transform 0.2s; cursor: pointer;
-    }
-    .leistung-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.09); transform: translateY(-3px); }
-    .leistung-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-    .leistung-card h3 { font-family: 'Playfair Display',serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .leistung-card p { color: var(--text-muted); font-size: 0.93rem; }
+/* USP STRIP */
+.usp-strip{background:var(--blue);padding:2.5rem 2rem}
+.usp-strip .container{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem}
+.usp-item{display:flex;align-items:flex-start;gap:1rem}
+.usp-item .usp-dot{width:40px;height:40px;background:rgba(232,98,26,0.2);border:1px solid rgba(232,98,26,0.4);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.usp-item strong{display:block;color:#fff;font-size:0.9rem;font-weight:600;margin-bottom:0.2rem}
+.usp-item span{color:rgba(255,255,255,0.45);font-size:0.8rem}
 
-    .leistung-detail { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start; padding: 3rem 0; border-bottom: 1px solid #e8e0d4; }
-    .leistung-detail:last-child { border-bottom: none; }
-    .leistung-detail-icon {
-      font-size: 3.5rem; background: var(--cream); padding: 2rem;
-      display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
-    }
-    .leistung-detail-icon span { font-family: 'Playfair Display',serif; font-size: 1.1rem; color: var(--warm-dark); }
-    .leistung-detail-body h3 { font-family: 'Playfair Display',serif; font-size: 1.4rem; margin-bottom: 0.6rem; color: var(--warm-dark); }
-    .leistung-detail-body p { color: var(--text-muted); font-weight: 300; margin-bottom: 0.6rem; }
-    .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
-    .tag { background: var(--cream); border: 1px solid #d9cfbf; color: var(--text-muted); padding: 0.25em 0.8em; font-size: 0.8rem; font-weight: 600; }
+/* INTRO SECTION */
+.intro-section{padding:6rem 2rem}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.intro-img{position:relative}
+.intro-img img{width:100%;display:block;filter:contrast(1.05)}
+.intro-img-badge{
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  background:var(--orange);color:#fff;padding:1.5rem;text-align:center;
+}
+.intro-img-badge strong{display:block;font-family:'Playfair Display',serif;font-size:2.2rem;line-height:1}
+.intro-img-badge span{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.85}
+.intro-text .check-list{list-style:none;margin-top:1.5rem;display:flex;flex-direction:column;gap:0.7rem}
+.check-list li{display:flex;align-items:flex-start;gap:0.8rem;color:var(--text-mid);font-size:0.97rem}
+.check-list li::before{content:'✓';color:var(--orange);font-weight:700;flex-shrink:0;margin-top:0.1rem}
 
-    /* ════ ÜBER UNS PAGE ════ */
-    .ueber-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .ueber-img { position: relative; }
-    .ueber-img img { width: 100%; display: block; filter: sepia(15%) contrast(1.05); }
-    .ueber-img::before { content: ''; position: absolute; top: -16px; left: -16px; right: 16px; bottom: 16px; border: 3px solid var(--copper); z-index: -1; }
-    .years-badge {
-      background: var(--copper); color: #fff;
-      font-family: 'Playfair Display',serif; font-size: 3rem; font-weight: 700;
-      width: 110px; height: 110px; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; margin-bottom: 1.8rem; line-height: 1;
-    }
-    .years-badge small { font-family: 'Source Sans 3',sans-serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
-    .check-list { list-style: none; margin-top: 1.5rem; }
-    .check-list li { padding: 0.35rem 0 0.35rem 1.8rem; position: relative; color: var(--text-muted); font-size: 0.97rem; }
-    .check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--copper); font-weight: 700; }
-    .team-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 2rem; margin-top: 1rem; }
-    .team-card { background: var(--warm-white); padding: 2rem; text-align: center; }
-    .team-avatar {
-      width: 80px; height: 80px; border-radius: 50%; background: var(--copper); color: #fff;
-      font-family: 'Playfair Display',serif; font-size: 1.8rem;
-      display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;
-    }
-    .team-card h4 { font-family: 'Playfair Display',serif; font-size: 1.1rem; }
-    .team-card span { color: var(--text-muted); font-size: 0.85rem; }
+/* LEISTUNGEN CARDS (start page) */
+.leistungen-section{background:var(--gray);padding:6rem 2rem}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.service-card{
+  background:#fff;padding:2.2rem;
+  border-bottom:4px solid transparent;
+  transition:all 0.3s;cursor:pointer;
+  position:relative;overflow:hidden;
+}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gray-mid);transition:background 0.3s}
+.service-card:hover::before{background:var(--orange)}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.1)}
+.service-card-icon{font-size:2.2rem;margin-bottom:1.2rem}
+.service-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--blue);margin-bottom:0.6rem}
+.service-card p{color:var(--text-mid);font-size:0.92rem;line-height:1.6}
+.service-card-arrow{margin-top:1.5rem;color:var(--orange);font-weight:700;font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;gap:0.4rem;transition:gap 0.2s}
+.service-card:hover .service-card-arrow{gap:0.8rem}
 
-    /* ════ ANFRAGE PAGE ════ */
-    .form-wrap { background: var(--anthracite); padding: 4rem 2.5rem; }
-    .form-wrap .section-title { color: var(--cream); }
-    .form-wrap .section-sub { color: rgba(255,255,255,0.45); }
-    .form-wrap .section-label { color: var(--copper-light); }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-    .form-group.full { grid-column: 1/-1; }
-    .form-group label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
-    .form-group input, .form-group select, .form-group textarea {
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14);
-      color: #fff; padding: 0.85em 1em; font-family: 'Source Sans 3',sans-serif;
-      font-size: 1rem; outline: none; transition: border-color 0.2s; width: 100%;
-    }
-    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.22); }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--copper-light); }
-    .form-group select option { background: var(--anthracite); }
-    .form-group textarea { resize: vertical; min-height: 130px; }
-    .form-submit { margin-top: 1.5rem; text-align: right; }
-    .btn-submit {
-      background: var(--copper); color: #fff; border: none; cursor: pointer;
-      padding: 1em 2.5em; font-family: 'Source Sans 3',sans-serif;
-      font-size: 0.95rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.2s;
-    }
-    .btn-submit:hover { background: var(--copper-light); }
-    .form-note { font-size: 0.8rem; color: rgba(255,255,255,0.28); margin-top: 0.8rem; }
-    .success-msg {
-      display: none; background: rgba(184,100,42,0.15); border: 1px solid var(--copper);
-      color: #fff; padding: 1.2rem 1.5rem; margin-top: 1.5rem; font-size: 0.97rem;
-    }
-    .anfrage-info { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 2rem; padding: 3rem 2.5rem; max-width: 1100px; margin: 0 auto; }
-    .anfrage-info-item { display: flex; gap: 1rem; align-items: flex-start; }
-    .anfrage-info-item .ai-icon { font-size: 1.8rem; flex-shrink: 0; }
-    .anfrage-info-item strong { display: block; color: var(--warm-dark); font-size: 1rem; }
-    .anfrage-info-item span { color: var(--text-muted); font-size: 0.87rem; }
+/* ALTERNATING SECTIONS */
+.alt-section{padding:6rem 2rem}
+.alt-section:nth-child(even){background:var(--gray)}
+.alt-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.alt-grid.reverse{direction:rtl}
+.alt-grid.reverse > *{direction:ltr}
+.alt-img img{width:100%;display:block}
+.alt-text{}
 
-    /* ════ KONTAKT PAGE ════ */
-    .kontakt-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .kontakt-info-block { display: flex; flex-direction: column; gap: 2rem; }
-    .kontakt-row { display: flex; gap: 1.2rem; align-items: flex-start; }
-    .kontakt-row .kr-icon { font-size: 1.8rem; flex-shrink: 0; background: var(--cream); width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; }
-    .kontakt-row strong { display: block; font-size: 1rem; color: var(--warm-dark); }
-    .kontakt-row span { color: var(--text-muted); font-size: 0.88rem; }
-    .kontakt-row a { color: var(--copper); text-decoration: none; }
-    .oeffnungszeiten { background: var(--cream); padding: 1.8rem; border-left: 4px solid var(--copper); }
-    .oeffnungszeiten h4 { font-family: 'Playfair Display',serif; font-size: 1.1rem; margin-bottom: 1rem; }
-    .oz-row { display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid #e0d8cc; font-size: 0.92rem; }
-    .oz-row:last-child { border-bottom: none; }
-    .oz-row .day { color: var(--text-muted); }
-    .oz-row .time { font-weight: 600; }
-    .map-placeholder {
-      background: var(--cream); height: 280px;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 0.8rem;
-      border: 2px dashed var(--copper); color: var(--text-muted); text-align: center; padding: 2rem;
-    }
-    .map-placeholder .mp-icon { font-size: 2.5rem; }
-    .map-placeholder p { font-size: 0.88rem; }
-    .notdienst-banner {
-      background: var(--warm-dark); padding: 2.5rem; margin-top: 0;
-      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
-    }
-    .notdienst-banner .nd-icon { font-size: 2.5rem; flex-shrink: 0; }
-    .notdienst-banner strong { display: block; color: #fff; font-size: 1.1rem; }
-    .notdienst-banner span { color: rgba(255,255,255,0.55); font-size: 0.88rem; }
-    .notdienst-banner a { color: var(--copper-light); font-weight: 700; text-decoration: none; font-size: 1.1rem; }
+/* CTA SECTION */
+.cta-section{
+  background:linear-gradient(135deg,var(--blue) 0%,var(--blue-mid) 100%);
+  padding:5rem 2rem;text-align:center;
+}
+.cta-section .section-label{color:rgba(255,255,255,0.5)}
+.cta-section .section-title{color:#fff;margin:0 auto 1rem}
+.cta-section p{color:rgba(255,255,255,0.65);margin-bottom:2rem;font-weight:300}
+.cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 820px) {
-      nav ul { display: none; }
-      .hamburger { display: flex; }
-      .ueber-layout, .kontakt-layout { grid-template-columns: 1fr; }
-      .ueber-img { display: none; }
-      .leistung-detail { grid-template-columns: 1fr; gap: 1.5rem; }
-      .form-grid { grid-template-columns: 1fr; }
-      section { padding: 3.5rem 1.5rem; }
-      .hero { padding: 3rem 1.5rem; }
-      .anfrage-info { padding: 2.5rem 1.5rem; }
-    }
+/* CONTACT BAR */
+.contact-bar{background:var(--orange);padding:2rem}
+.contact-bar .container{display:flex;flex-wrap:wrap;gap:2rem;align-items:center;justify-content:space-between}
+.contact-bar-item{display:flex;align-items:center;gap:0.8rem;color:#fff}
+.contact-bar-item .cb-icon{font-size:1.3rem;opacity:0.8}
+.contact-bar-item strong{display:block;font-size:0.95rem}
+.contact-bar-item span{opacity:0.75;font-size:0.82rem}
 
-    /* ════ LEGAL PAGES ════ */
-    .legal-page { max-width: 800px; margin: 0 auto; padding: 4rem 2.5rem; }
-    .legal-page h1 { font-family: 'Playfair Display',serif; font-size: 2rem; color: var(--warm-dark); margin-bottom: 0.5rem; }
-    .legal-page .legal-intro { color: var(--text-muted); font-weight: 300; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--copper); }
-    .legal-page h2 { font-family: 'Playfair Display',serif; font-size: 1.2rem; color: var(--warm-dark); margin: 2.5rem 0 0.6rem; }
-    .legal-page p { color: var(--text-muted); font-weight: 300; margin-bottom: 0.6rem; font-size: 0.97rem; }
-    .legal-page a { color: var(--copper); text-decoration: none; }
-    .legal-page .placeholder {
-      background: var(--cream); border-left: 3px solid var(--copper);
-      padding: 0.7rem 1rem; color: var(--copper); font-size: 0.85rem;
-      font-weight: 600; margin: 0.3rem 0 0.8rem;
-    }
-    .legal-page ul { color: var(--text-muted); font-weight: 300; font-size: 0.97rem; padding-left: 1.5rem; margin-bottom: 0.6rem; }
-    .legal-page ul li { margin-bottom: 0.3rem; }
-    .back-btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      color: var(--copper); font-weight: 600; font-size: 0.85rem;
-      text-decoration: none; cursor: pointer; margin-bottom: 2rem;
-      letter-spacing: 0.05em; text-transform: uppercase;
-    }
-    .back-btn:hover { color: var(--copper-light); }
-  </style>
+/* ═══════════════════
+   LEISTUNGEN PAGE
+═══════════════════ */
+.leistungen-detail-section{padding:5rem 2rem;border-bottom:1px solid var(--gray)}
+.leistungen-detail-section:last-of-type{border-bottom:none}
+.ld-grid{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start}
+.ld-icon-block{background:var(--gray);padding:2.5rem;text-align:center}
+.ld-icon-block .ld-icon{font-size:3rem;margin-bottom:0.8rem}
+.ld-icon-block span{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--blue)}
+.ld-body h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--blue);margin-bottom:0.8rem}
+.ld-body p{color:var(--text-mid);font-weight:300;margin-bottom:0.6rem}
+.tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem}
+.tag{background:var(--blue-light);color:var(--blue);padding:0.3em 0.9em;font-size:0.78rem;font-weight:600;letter-spacing:0.05em}
+
+/* ═══════════════════
+   ÜBER UNS PAGE
+═══════════════════ */
+.ueber-intro{padding:5rem 2rem;background:#fff}
+.ueber-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.ueber-img-wrap{position:relative}
+.ueber-img-wrap img{width:100%;display:block}
+.ueber-img-wrap::after{content:'';position:absolute;top:-12px;left:-12px;right:12px;bottom:12px;border:3px solid var(--orange);z-index:-1}
+.years-box{background:var(--orange);color:#fff;padding:1.5rem;text-align:center;margin-bottom:2rem;display:inline-block}
+.years-box strong{display:block;font-family:'Playfair Display',serif;font-size:3rem;line-height:1}
+.years-box small{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.85}
+.werte-section{background:var(--gray);padding:5rem 2rem}
+.werte-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.wert-card{background:#fff;padding:2rem;border-top:4px solid var(--orange)}
+.wert-card h4{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--blue);margin-bottom:0.5rem}
+.wert-card p{color:var(--text-mid);font-size:0.92rem;font-weight:300}
+.team-section{padding:5rem 2rem}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2rem}
+.team-card{text-align:center;padding:2rem}
+.team-avatar{width:80px;height:80px;border-radius:50%;background:var(--blue);color:#fff;font-family:'Playfair Display',serif;font-size:1.8rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;border:3px solid var(--orange)}
+.team-card h4{font-family:'Playfair Display',serif;color:var(--blue);margin-bottom:0.3rem}
+.team-card span{color:var(--text-light);font-size:0.85rem}
+
+/* ═══════════════════
+   ANFRAGE PAGE
+═══════════════════ */
+.anfrage-wrap{display:grid;grid-template-columns:1fr 2fr;gap:0}
+.anfrage-sidebar{background:var(--blue);padding:4rem 2.5rem}
+.anfrage-sidebar .section-title{color:#fff;font-size:1.8rem}
+.anfrage-sidebar .section-sub{color:rgba(255,255,255,0.55)}
+.anfrage-info-item{display:flex;gap:1rem;margin-bottom:1.8rem;align-items:flex-start}
+.anfrage-info-item .ai-icon{font-size:1.6rem;flex-shrink:0;margin-top:3px}
+.anfrage-info-item strong{display:block;color:#fff;font-size:0.95rem;margin-bottom:0.2rem}
+.anfrage-info-item span{color:rgba(255,255,255,0.5);font-size:0.85rem}
+.anfrage-form-wrap{background:#fff;padding:4rem 3rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light)}
+.form-group input,.form-group select,.form-group textarea{
+  border:1px solid var(--gray-mid);background:#fff;color:var(--text);
+  padding:0.85em 1em;font-family:'Inter',sans-serif;font-size:0.97rem;
+  outline:none;transition:border-color 0.2s;width:100%;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--orange)}
+.form-group textarea{resize:vertical;min-height:130px}
+.form-submit{margin-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.form-note{font-size:0.78rem;color:var(--text-light)}
+.success-msg{display:none;background:var(--blue-light);border-left:4px solid var(--orange);padding:1.2rem 1.5rem;margin-top:1.5rem;color:var(--blue);font-size:0.95rem}
+
+/* ═══════════════════
+   KONTAKT PAGE
+═══════════════════ */
+.kontakt-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;padding:5rem 2rem}
+.kontakt-info{display:flex;flex-direction:column;gap:2rem}
+.k-row{display:flex;gap:1.2rem;align-items:flex-start}
+.k-icon-box{width:50px;height:50px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.k-row strong{display:block;color:var(--blue);font-size:1rem;margin-bottom:0.2rem}
+.k-row span,.k-row p{color:var(--text-mid);font-size:0.9rem}
+.k-row a{color:var(--orange);text-decoration:none;font-weight:600}
+.oeffnungszeiten{background:var(--gray);padding:2rem;margin-top:1rem}
+.oeffnungszeiten h4{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--blue);margin-bottom:1rem}
+.oz-row{display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--gray-mid);font-size:0.9rem}
+.oz-row:last-child{border-bottom:none}
+.oz-row .day{color:var(--text-mid)}
+.oz-row .time{font-weight:600;color:var(--blue)}
+.map-box{background:var(--gray);height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;border:2px dashed var(--gray-mid);text-align:center;padding:2rem;color:var(--text-light)}
+.map-box .mp-icon{font-size:2.5rem}
+.map-box p{font-size:0.85rem}
+.notdienst-card{background:var(--blue);padding:2rem;display:flex;gap:1.5rem;align-items:center;margin-top:1.5rem}
+.notdienst-card .nd-icon{font-size:2rem;flex-shrink:0}
+.notdienst-card strong{display:block;color:#fff;font-size:1rem;margin-bottom:0.3rem}
+.notdienst-card a{color:var(--orange-light);font-weight:700;text-decoration:none;font-size:1.05rem}
+
+/* ═══════════════════
+   LEGAL PAGES
+═══════════════════ */
+.legal-wrap{max-width:800px;margin:0 auto;padding:4rem 2rem}
+.legal-wrap h1{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--blue);margin-bottom:0.5rem}
+.legal-intro{color:var(--text-light);border-bottom:2px solid var(--orange);padding-bottom:1.5rem;margin-bottom:2.5rem;font-size:0.95rem}
+.legal-wrap h2{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--blue);margin:2.5rem 0 0.6rem}
+.legal-wrap p{color:var(--text-mid);font-weight:300;font-size:0.95rem;margin-bottom:0.6rem}
+.legal-wrap a{color:var(--orange);text-decoration:none}
+.legal-wrap ul{color:var(--text-mid);font-weight:300;font-size:0.95rem;padding-left:1.5rem;margin-bottom:0.8rem}
+.legal-wrap ul li{margin-bottom:0.3rem}
+.placeholder-box{background:var(--blue-light);border-left:3px solid var(--orange);padding:0.6rem 1rem;font-size:0.82rem;color:var(--orange);font-weight:600;margin:0.3rem 0 0.8rem}
+.back-link{display:inline-flex;align-items:center;gap:0.5rem;color:var(--orange);font-weight:600;font-size:0.85rem;cursor:pointer;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2.5rem;text-decoration:none}
+.back-link:hover{color:var(--orange-light)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+  .nav-links,.nav-phone{display:none}
+  .hamburger{display:flex}
+  .intro-grid,.alt-grid,.ueber-grid,.kontakt-layout,.ld-grid,.anfrage-wrap{grid-template-columns:1fr}
+  .alt-grid.reverse{direction:ltr}
+  .intro-img,.ueber-img-wrap{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem}
+  .hero{min-height:auto;padding:4rem 1.5rem 3rem}
+  section,.alt-section,.leistungen-section,.leistungen-detail-section,.ueber-intro,.werte-section,.team-section,.anfrage-form-wrap,.anfrage-sidebar{padding:3.5rem 1.5rem}
+  .container{padding:0 1.5rem}
+}
+@media(max-width:580px){
+  .footer-grid{grid-template-columns:1fr}
+  .hero-stats{flex-wrap:wrap}
+  .hero-actions{flex-direction:column}
+  .contact-bar .container{flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
-<nav>
-  <div class="nav-logo" onclick="navigate('start')">A&amp;S <span>Gebäudetechnik GmbH</span></div>
-  <ul id="navLinks">
-    <li><a href="#" onclick="navigate('start');return false;" data-page="start" class="active">Start</a></li>
-    <li><a href="#" onclick="navigate('leistungen');return false;" data-page="leistungen">Leistungen</a></li>
-    <li><a href="#" onclick="navigate('ueber');return false;" data-page="ueber">Über uns</a></li>
-    <li><a href="#" onclick="navigate('anfrage');return false;" data-page="anfrage">Anfrage</a></li>
-    <li><a href="#" onclick="navigate('kontakt');return false;" data-page="kontakt">Kontakt</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
+<!-- ═══ COOKIE BANNER ═══ -->
+<div class="cookie-overlay" id="cookieBanner">
+  <div class="cookie-box">
+    <h3>🍪 Diese Website verwendet Cookies</h3>
+    <p>Wir verwenden Cookies, um Ihnen die bestmögliche Nutzererfahrung zu bieten. Technisch notwendige Cookies sind immer aktiv. Mit Klick auf „Alle akzeptieren" stimmen Sie auch der Nutzung optionaler Cookies zu. Mehr erfahren Sie in unserer <a href="#" onclick="navigate('datenschutz');closeCookies();return false;">Datenschutzerklärung</a>.</p>
+    <div class="cookie-actions">
+      <button class="cookie-btn cookie-accept" onclick="acceptCookies()">Alle akzeptieren</button>
+      <button class="cookie-btn cookie-essential" onclick="acceptEssential()">Nur notwendige</button>
+      <button class="cookie-link" onclick="navigate('datenschutz');closeCookies();return false;">Datenschutz</button>
+      <button class="cookie-link" onclick="navigate('impressum');closeCookies();return false;">Impressum</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NOTDIENST TOP BAR ═══ -->
+<div class="notdienst-top">
+  <p>⚡ Telefonischer Notdienst 24/7 erreichbar: <a href="tel:+49XXXXXXXXX">+49 XXX XXXXXXX</a></p>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a class="nav-logo" onclick="navigate('start');return false;" href="#">
+      <span class="nav-logo-main">A<span>&amp;</span>S <span style="color:var(--blue)">Gebäudetechnik</span></span>
+      <span class="nav-logo-sub">GmbH · Heizung & Sanitär</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" onclick="navigate('start');return false;" data-page="start" class="active">Start</a></li>
+      <li><a href="#" onclick="navigate('leistungen');return false;" data-page="leistungen">Leistungen</a></li>
+      <li><a href="#" onclick="navigate('ueber');return false;" data-page="ueber">Über uns</a></li>
+      <li><a href="#" onclick="navigate('anfrage');return false;" data-page="anfrage">Anfrage</a></li>
+      <li><a href="#" onclick="navigate('kontakt');return false;" data-page="kontakt">Kontakt</a></li>
+    </ul>
+    <div class="nav-phone">
+      <span class="ph-icon">📞</span>
+      +49 XXX XXXXXXX
+    </div>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#" onclick="navigate('start');return false;" data-mpage="start" class="active">Start</a>
+  <a href="#" onclick="navigate('start');return false;" data-mpage="start">Start</a>
   <a href="#" onclick="navigate('leistungen');return false;" data-mpage="leistungen">Leistungen</a>
   <a href="#" onclick="navigate('ueber');return false;" data-mpage="ueber">Über uns</a>
   <a href="#" onclick="navigate('anfrage');return false;" data-mpage="anfrage">Anfrage</a>
   <a href="#" onclick="navigate('kontakt');return false;" data-mpage="kontakt">Kontakt</a>
-  <a href="#" onclick="navigate('impressum');return false;" data-mpage="impressum" style="font-size:0.75rem;color:rgba(255,255,255,0.4);">Impressum</a>
-  <a href="#" onclick="navigate('datenschutz');return false;" data-mpage="datenschutz" style="font-size:0.75rem;color:rgba(255,255,255,0.4);">Datenschutz</a>
+  <div class="mobile-phone">📞 +49 XXX XXXXXXX · Notdienst 24/7</div>
 </div>
 
-<!-- ══════════════════════════
+<!-- ══════════════════════════════════
      START
-══════════════════════════ -->
+══════════════════════════════════ -->
 <div class="page active" id="page-start">
   <div class="hero">
-    <div style="max-width:700px;position:relative;z-index:1;">
-      <div class="hero-badge">Ihr Fachbetrieb vor Ort</div>
-      <h1>Heizung. Sanitär.<br><em>Gebäudetechnik.</em><br>Alles aus einer Hand.</h1>
-      <p>Von der Wartung bis zur Neuinstallation – wir sorgen dafür, dass Ihr Zuhause warm, sicher und effizient bleibt.</p>
-      <button class="btn" onclick="navigate('anfrage')">Jetzt Anfrage stellen</button>
-      <button class="btn btn-ghost" onclick="navigate('leistungen')">Unsere Leistungen</button>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Ihr Fachbetrieb für Gebäudetechnik</div>
+      <h1>Heizung. Sanitär.<br><em>Aus einer Hand.</em></h1>
+      <p class="hero-sub">Von der Wartung bis zur kompletten Neuanlage – wir sorgen dafür, dass Ihr Gebäude warm, sicher und effizient bleibt.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="navigate('anfrage')">Jetzt Anfrage stellen</button>
+        <button class="btn btn-white-outline" onclick="navigate('leistungen')">Unsere Leistungen</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>[XX]</strong><span>Jahre Erfahrung</span></div>
+        <div class="hero-stat"><strong>[XXX]+</strong><span>Zufriedene Kunden</span></div>
+        <div class="hero-stat"><strong>24/7</strong><span>Notdienst</span></div>
+      </div>
     </div>
   </div>
 
   <div class="usp-strip">
-    <div class="usp-grid">
-      <div class="usp-item"><div class="usp-icon">⚡</div><div><strong>Schnelle Reaktionszeit</strong><span>Notfälle werden vorrangig behandelt</span></div></div>
-      <div class="usp-item"><div class="usp-icon">🔧</div><div><strong>Geprüfte Fachkraft</strong><span>Staatlich zugelassener Meisterbetrieb</span></div></div>
-      <div class="usp-item"><div class="usp-icon">📋</div><div><strong>Festpreisangebot</strong><span>Transparente Kosten, keine Überraschungen</span></div></div>
-      <div class="usp-item"><div class="usp-icon">📍</div><div><strong>Regional & verlässlich</strong><span>Persönlicher Kontakt, kein Call-Center</span></div></div>
+    <div class="container">
+      <div class="usp-item reveal"><div class="usp-dot">⚡</div><div><strong>Schnelle Reaktionszeit</strong><span>Notfälle werden vorrangig behandelt</span></div></div>
+      <div class="usp-item reveal"><div class="usp-dot">🔧</div><div><strong>Meisterbetrieb</strong><span>Staatlich zugelassener Fachbetrieb</span></div></div>
+      <div class="usp-item reveal"><div class="usp-dot">📋</div><div><strong>Festpreisangebot</strong><span>Transparent & ohne Überraschungen</span></div></div>
+      <div class="usp-item reveal"><div class="usp-dot">📍</div><div><strong>Regional & persönlich</strong><span>Kein Call-Center – direkt zum Betrieb</span></div></div>
     </div>
   </div>
 
-  <section style="background:var(--cream);">
+  <section class="intro-section">
     <div class="container">
-      <div class="section-label">Was wir bieten</div>
-      <h2 class="section-title">Unsere Leistungen im Überblick</h2>
-      <p class="section-sub">Kompetent, sauber und termingerecht – von der Beratung bis zur Fertigstellung.</p>
-      <div class="leistungen-grid">
-        <div class="leistung-card" onclick="navigate('leistungen')"><div class="leistung-icon">🔥</div><h3>Heizungsanlagen</h3><p>Wartung, Reparatur und Neuinstallation aller gängigen Heizungssysteme.</p></div>
-        <div class="leistung-card" onclick="navigate('leistungen')"><div class="leistung-icon">🚿</div><h3>Sanitär & Rohrleitungen</h3><p>Badinstallationen, Rohrbrüche, Leckortung – schnell und fachgerecht.</p></div>
-        <div class="leistung-card" onclick="navigate('leistungen')"><div class="leistung-icon">🌡️</div><h3>Heizungswartung</h3><p>Jährliche Wartungsverträge für einen sicheren, effizienten Betrieb.</p></div>
-        <div class="leistung-card" onclick="navigate('leistungen')"><div class="leistung-icon">♻️</div><h3>Energieeffizienz</h3><p>Hydraulischer Abgleich, Pumpentausch – sparen Sie Energie und Kosten.</p></div>
-        <div class="leistung-card" onclick="navigate('leistungen')"><div class="leistung-icon">🏠</div><h3>Lüftung & Klima</h3><p>Lüftungsanlagen, Klimatisierung und Trinkwassererwärmung aus einer Hand.</p></div>
-        <div class="leistung-card" onclick="navigate('leistungen')"><div class="leistung-icon">⚠️</div><h3>Notdienst</h3><p>Heizungsausfall oder Rohrbruch? Wir sind auch außerhalb der Öffnungszeiten da.</p></div>
+      <div class="intro-grid">
+        <div class="intro-img reveal-left">
+          <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=700&q=80" alt="Gebäudetechnik Fachmann"/>
+          <div class="intro-img-badge"><strong>[XX]</strong><span>Jahre<br>Erfahrung</span></div>
+        </div>
+        <div class="intro-text reveal-right">
+          <span class="section-label">Wer wir sind</span>
+          <h2 class="section-title">Ihr zuverlässiger Partner für Heizung & Sanitär</h2>
+          <p class="section-sub">[Kurzer Einleitungstext über den Betrieb – was Sie auszeichnet, wie lange Sie in der Region tätig sind und was Ihnen wichtig ist.]</p>
+          <ul class="check-list">
+            <li>Inhabergeführter Betrieb mit persönlichem Kontakt</li>
+            <li>Langjährige Erfahrung in der Region</li>
+            <li>Alle Arbeiten nach aktueller Norm & DVGW</li>
+            <li>Sauber, pünktlich und termingerecht</li>
+            <li>Kostenlose Erstberatung & unverbindliches Angebot</li>
+          </ul>
+          <div style="margin-top:2rem"><button class="btn btn-outline" onclick="navigate('ueber')">Mehr über uns →</button></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="cta-banner">
-    <h2>Bereit für Ihre Anfrage?</h2>
-    <p>Wir antworten innerhalb von 24 Stunden – kostenlos und unverbindlich.</p>
-    <button class="btn btn-white" onclick="navigate('anfrage')">Jetzt Anfrage stellen →</button>
+  <section class="leistungen-section">
+    <div class="container">
+      <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 3rem">
+        <span class="section-label">Was wir bieten</span>
+        <h2 class="section-title">Unsere Leistungen</h2>
+        <p class="section-sub" style="margin:0 auto">Kompetente Beratung und zuverlässige Ausführung – von der Wartung bis zur Neuanlage.</p>
+      </div>
+      <div class="cards-grid">
+        <div class="service-card reveal" onclick="navigate('leistungen')">
+          <div class="service-card-icon">🔥</div>
+          <h3>Heizungsanlagen</h3>
+          <p>Wartung, Reparatur und Neuinstallation aller Heizungssysteme – Gas, Öl, Wärmepumpe, Solar.</p>
+          <div class="service-card-arrow">Mehr erfahren <span>→</span></div>
+        </div>
+        <div class="service-card reveal" onclick="navigate('leistungen')">
+          <div class="service-card-icon">🚿</div>
+          <h3>Sanitär & Rohrleitungen</h3>
+          <p>Badinstallationen, Rohrbrüche, Leckortung und Rohrerneuerung – schnell und fachgerecht.</p>
+          <div class="service-card-arrow">Mehr erfahren <span>→</span></div>
+        </div>
+        <div class="service-card reveal" onclick="navigate('leistungen')">
+          <div class="service-card-icon">🌡️</div>
+          <h3>Heizungswartung</h3>
+          <p>Jährliche Wartungsverträge für einen sicheren, effizienten und störungsfreien Betrieb.</p>
+          <div class="service-card-arrow">Mehr erfahren <span>→</span></div>
+        </div>
+        <div class="service-card reveal" onclick="navigate('leistungen')">
+          <div class="service-card-icon">♻️</div>
+          <h3>Energieeffizienz</h3>
+          <p>Hydraulischer Abgleich, Pumpentausch, Thermostate – sparen Sie Energie und Heizkosten.</p>
+          <div class="service-card-arrow">Mehr erfahren <span>→</span></div>
+        </div>
+        <div class="service-card reveal" onclick="navigate('leistungen')">
+          <div class="service-card-icon">🏠</div>
+          <h3>Lüftung & Klima</h3>
+          <p>Lüftungsanlagen mit Wärmerückgewinnung, Klimatisierung und Trinkwassererwärmung.</p>
+          <div class="service-card-arrow">Mehr erfahren <span>→</span></div>
+        </div>
+        <div class="service-card reveal" onclick="navigate('anfrage')">
+          <div class="service-card-icon">⚠️</div>
+          <h3>Notdienst 24/7</h3>
+          <p>Heizungsausfall oder Rohrbruch? Wir sind auch außerhalb der Öffnungszeiten für Sie da.</p>
+          <div class="service-card-arrow">Jetzt anrufen <span>→</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="container reveal">
+      <span class="section-label">Kostenlos & unverbindlich</span>
+      <h2 class="section-title" style="margin:0 auto 0.8rem">Bereit für Ihre Anfrage?</h2>
+      <p>Wir melden uns innerhalb von 24 Stunden bei Ihnen – persönlich und kompetent.</p>
+      <div class="cta-actions">
+        <button class="btn btn-primary" onclick="navigate('anfrage')">Anfrage stellen</button>
+        <button class="btn btn-white" onclick="navigate('kontakt')">Kontakt aufnehmen</button>
+      </div>
+    </div>
   </div>
 
-  <div class="kontakt-bar"><div class="container">
-    <div class="kontakt-item"><div class="k-icon">📞</div><div><strong>+49 XXX XXXXXXX</strong><span>Mo–Fr 7:00–18:00 Uhr</span></div></div>
-    <div class="kontakt-item"><div class="k-icon">✉️</div><div><strong>info@as-gebaeudetechnik.de</strong><span>Antwort innerhalb 24h</span></div></div>
-    <div class="kontakt-item"><div class="k-icon">📍</div><div><strong>Musterstraße 1, 12345 Musterstadt</strong><span>Servicegebiet: [Region]</span></div></div>
-  </div></div>
-  <footer><p>© 2025 A&amp;S Gebäudetechnik · <a href="#" onclick="navigate('impressum');return false;">Impressum</a> · <a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></p></footer>
+  <div class="contact-bar">
+    <div class="container">
+      <div class="contact-bar-item"><span class="cb-icon">📞</span><div><strong>+49 XXX XXXXXXX</strong><span>Mo–Fr 7:00–18:00 · Sa 8:00–13:00</span></div></div>
+      <div class="contact-bar-item"><span class="cb-icon">✉️</span><div><strong>info@as-gebaeudetechnik.de</strong><span>Antwort innerhalb 24h</span></div></div>
+      <div class="contact-bar-item"><span class="cb-icon">📍</span><div><strong>[Straße], [PLZ] [Stadt]</strong><span>Servicegebiet: [Region]</span></div></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo-main">A&amp;S <span style="color:rgba(255,255,255,0.5)">Gebäudetechnik GmbH</span></div>
+        <div class="nav-logo-sub" style="color:rgba(255,255,255,0.3);margin-top:0.3rem">Heizung · Sanitär · Gebäudetechnik</div>
+        <p>Ihr zuverlässiger Fachbetrieb für Heizung, Sanitär und Gebäudetechnik in [Region].</p>
+      </div>
+      <div class="footer-col"><h4>Leistungen</h4><ul>
+        <li><a href="#" onclick="navigate('leistungen');return false;">Heizungsanlagen</a></li>
+        <li><a href="#" onclick="navigate('leistungen');return false;">Sanitär</a></li>
+        <li><a href="#" onclick="navigate('leistungen');return false;">Heizungswartung</a></li>
+        <li><a href="#" onclick="navigate('leistungen');return false;">Energieeffizienz</a></li>
+        <li><a href="#" onclick="navigate('leistungen');return false;">Notdienst</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Unternehmen</h4><ul>
+        <li><a href="#" onclick="navigate('ueber');return false;">Über uns</a></li>
+        <li><a href="#" onclick="navigate('anfrage');return false;">Anfrage stellen</a></li>
+        <li><a href="#" onclick="navigate('kontakt');return false;">Kontakt</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Kontakt</h4><ul>
+        <li><span>+49 XXX XXXXXXX</span></li>
+        <li><span>info@as-gebaeudetechnik.de</span></li>
+        <li><span>[Straße Nr.]</span></li>
+        <li><span>[PLZ] [Stadt]</span></li>
+        <li><span>Mo–Fr: 7–18 Uhr</span></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 A&amp;S Gebäudetechnik GmbH. Alle Rechte vorbehalten.</p>
+      <div class="footer-bottom-links">
+        <a href="#" onclick="navigate('impressum');return false;">Impressum</a>
+        <a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
 </div>
 
-<!-- ══════════════════════════
+<!-- ══════════════════════════════════
      LEISTUNGEN
-══════════════════════════ -->
+══════════════════════════════════ -->
 <div class="page" id="page-leistungen">
-  <div class="page-header" style="background-image:linear-gradient(155deg,rgba(30,32,34,0.88),rgba(44,36,24,0.78)),url('https://images.unsplash.com/photo-1581093458791-9d15482442f6?w=1200&q=80');">
-    <div class="section-label">Was wir bieten</div>
+  <div class="page-header">
+    <span class="section-label">Was wir anbieten</span>
     <h1>Unsere Leistungen</h1>
-    <p>Von der einfachen Wartung bis zur kompletten Neuanlage – verlässlich, sauber und zum Festpreis.</p>
+    <p>Von der einfachen Wartung bis zur kompletten Neuanlage – verlässlich, sauber, zum Festpreis.</p>
   </div>
-  <section>
-    <div class="container">
-      <div class="leistung-detail">
-        <div class="leistung-detail-icon">🔥<span>Heizung</span></div>
-        <div class="leistung-detail-body">
+  <div class="container">
+    <div class="leistungen-detail-section reveal">
+      <div class="ld-grid">
+        <div class="ld-icon-block"><div class="ld-icon">🔥</div><span>Heizung</span></div>
+        <div class="ld-body">
           <h3>Heizungsanlagen</h3>
-          <p>Wir installieren, warten und reparieren alle gängigen Heizungssysteme. Ob veraltete Gasheizung, moderne Wärmepumpe oder Solarthermie – wir kennen jede Anlage.</p>
-          <p>[Weitere Details, Marken oder Besonderheiten Ihres Angebots eintragen.]</p>
-          <div class="tag-list"><span class="tag">Gasheizung</span><span class="tag">Öl</span><span class="tag">Wärmepumpe</span><span class="tag">Solar</span><span class="tag">Pellets</span></div>
+          <p>Wir installieren, warten und reparieren alle gängigen Heizungssysteme. Ob veraltete Gasheizung, moderne Wärmepumpe oder Solarthermie – wir finden die passende Lösung für Ihr Gebäude.</p>
+          <p>[Weitere Details zu Ihrem Angebot, z.B. Marken oder Besonderheiten.]</p>
+          <div class="tag-row"><span class="tag">Gasheizung</span><span class="tag">Ölheizung</span><span class="tag">Wärmepumpe</span><span class="tag">Solarthermie</span><span class="tag">Pellets</span></div>
         </div>
       </div>
-      <div class="leistung-detail">
-        <div class="leistung-detail-icon">🚿<span>Sanitär</span></div>
-        <div class="leistung-detail-body">
+    </div>
+    <div class="leistungen-detail-section reveal">
+      <div class="ld-grid">
+        <div class="ld-icon-block"><div class="ld-icon">🚿</div><span>Sanitär</span></div>
+        <div class="ld-body">
           <h3>Sanitär & Rohrleitungen</h3>
-          <p>Komplette Badezimmerinstallationen, Rohrerneuerung, Leckortung und Druckprüfung. Wir arbeiten sauber und hinterlassen keine Baustellen.</p>
-          <div class="tag-list"><span class="tag">Badsanierung</span><span class="tag">Rohrbruch</span><span class="tag">Leckortung</span><span class="tag">Leitungsbau</span></div>
+          <p>Komplette Badezimmerinstallationen, Rohrerneuerung, Leckortung und Druckprüfung. Wir arbeiten sauber, schnell und hinterlassen keine Baustellen.</p>
+          <div class="tag-row"><span class="tag">Badsanierung</span><span class="tag">Rohrbruch</span><span class="tag">Leckortung</span><span class="tag">Leitungsbau</span></div>
         </div>
       </div>
-      <div class="leistung-detail">
-        <div class="leistung-detail-icon">🌡️<span>Wartung</span></div>
-        <div class="leistung-detail-body">
+    </div>
+    <div class="leistungen-detail-section reveal">
+      <div class="ld-grid">
+        <div class="ld-icon-block"><div class="ld-icon">🌡️</div><span>Wartung</span></div>
+        <div class="ld-body">
           <h3>Heizungswartung & Wartungsverträge</h3>
           <p>Regelmäßige Wartung verlängert die Lebensdauer Ihrer Anlage und spart Energiekosten. Mit einem Wartungsvertrag haben Sie bei uns immer Priorität.</p>
-          <div class="tag-list"><span class="tag">Jahreswartung</span><span class="tag">Wartungsvertrag</span><span class="tag">Abgasmessung</span></div>
-        </div>
-      </div>
-      <div class="leistung-detail">
-        <div class="leistung-detail-icon">♻️<span>Effizienz</span></div>
-        <div class="leistung-detail-body">
-          <h3>Energieeffizienz & Modernisierung</h3>
-          <p>Hydraulischer Abgleich, Austausch veralteter Pumpen, Thermostatventile – kleine Maßnahmen mit großer Wirkung auf Ihre Heizkostenabrechnung.</p>
-          <div class="tag-list"><span class="tag">Hydr. Abgleich</span><span class="tag">Pumpentausch</span><span class="tag">Thermostate</span><span class="tag">Förderberatung</span></div>
-        </div>
-      </div>
-      <div class="leistung-detail">
-        <div class="leistung-detail-icon">🏠<span>Lüftung</span></div>
-        <div class="leistung-detail-body">
-          <h3>Lüftung, Klima & Trinkwasser</h3>
-          <p>Planung und Installation von Lüftungsanlagen mit Wärmerückgewinnung, Klimageräten sowie Trinkwassererwärmungs- und Zirkulationssystemen.</p>
-          <div class="tag-list"><span class="tag">WRG-Lüftung</span><span class="tag">Klimaanlage</span><span class="tag">Trinkwasser</span><span class="tag">Zirkulation</span></div>
-        </div>
-      </div>
-      <div class="leistung-detail">
-        <div class="leistung-detail-icon">⚠️<span>Notdienst</span></div>
-        <div class="leistung-detail-body">
-          <h3>Notdienst</h3>
-          <p>Heizungsausfall im Winter oder Wasserrohrbruch in der Nacht – wir sind erreichbar. Notfälle werden bei uns immer vorrangig behandelt.</p>
-          <div class="tag-list"><span class="tag">Außerhalb Bürozeiten</span><span class="tag">Heizungsausfall</span><span class="tag">Rohrbruch</span></div>
+          <div class="tag-row"><span class="tag">Jahreswartung</span><span class="tag">Wartungsvertrag</span><span class="tag">Abgasmessung</span></div>
         </div>
       </div>
     </div>
-  </section>
-  <div class="cta-banner">
-    <h2>Fragen zu unseren Leistungen?</h2>
-    <p>Wir beraten Sie kostenlos und erstellen ein unverbindliches Angebot.</p>
-    <button class="btn btn-white" onclick="navigate('anfrage')">Jetzt Anfrage stellen →</button>
+    <div class="leistungen-detail-section reveal">
+      <div class="ld-grid">
+        <div class="ld-icon-block"><div class="ld-icon">♻️</div><span>Effizienz</span></div>
+        <div class="ld-body">
+          <h3>Energieeffizienz & Modernisierung</h3>
+          <p>Hydraulischer Abgleich, Austausch veralteter Pumpen, Thermostatventile – kleine Maßnahmen mit großer Wirkung auf Ihre Heizkostenabrechnung.</p>
+          <div class="tag-row"><span class="tag">Hydr. Abgleich</span><span class="tag">Pumpentausch</span><span class="tag">Thermostate</span><span class="tag">Förderberatung</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="leistungen-detail-section reveal">
+      <div class="ld-grid">
+        <div class="ld-icon-block"><div class="ld-icon">🏠</div><span>Lüftung</span></div>
+        <div class="ld-body">
+          <h3>Lüftung, Klima & Trinkwasser</h3>
+          <p>Planung und Installation von Lüftungsanlagen mit Wärmerückgewinnung, Klimageräten sowie Trinkwassererwärmungs- und Zirkulationssystemen.</p>
+          <div class="tag-row"><span class="tag">WRG-Lüftung</span><span class="tag">Klimaanlage</span><span class="tag">Trinkwasser</span><span class="tag">Zirkulation</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="leistungen-detail-section reveal">
+      <div class="ld-grid">
+        <div class="ld-icon-block"><div class="ld-icon">⚠️</div><span>Notdienst</span></div>
+        <div class="ld-body">
+          <h3>Notdienst 24/7</h3>
+          <p>Heizungsausfall im Winter oder Wasserrohrbruch – wir sind rund um die Uhr erreichbar. Notfälle werden bei uns immer vorrangig behandelt.</p>
+          <div class="tag-row"><span class="tag">24/7 erreichbar</span><span class="tag">Heizungsausfall</span><span class="tag">Wasserrohrbruch</span></div>
+          <div style="margin-top:1.5rem"><button class="btn btn-primary" onclick="navigate('anfrage')">Jetzt anfragen</button></div>
+        </div>
+      </div>
+    </div>
   </div>
-  <footer><p>© 2025 A&amp;S Gebäudetechnik · <a href="#" onclick="navigate('impressum');return false;">Impressum</a> · <a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></p></footer>
+  <div class="cta-section"><div class="container reveal">
+    <span class="section-label">Kostenlos & unverbindlich</span>
+    <h2 class="section-title" style="margin:0 auto 0.8rem">Fragen zu unseren Leistungen?</h2>
+    <p>Wir beraten Sie kostenlos und erstellen ein transparentes Angebot.</p>
+    <div class="cta-actions"><button class="btn btn-primary" onclick="navigate('anfrage')">Anfrage stellen</button></div>
+  </div></div>
+  <footer class="site-footer"><div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding:1.5rem 2rem"><p style="color:rgba(255,255,255,0.3);font-size:0.8rem">© 2025 A&amp;S Gebäudetechnik GmbH</p><div class="footer-bottom-links"><a href="#" onclick="navigate('impressum');return false;">Impressum</a><a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></div></div></footer>
 </div>
 
-<!-- ══════════════════════════
+<!-- ══════════════════════════════════
      ÜBER UNS
-══════════════════════════ -->
+══════════════════════════════════ -->
 <div class="page" id="page-ueber">
-  <div class="page-header" style="background-image:linear-gradient(155deg,rgba(30,32,34,0.88),rgba(44,36,24,0.78)),url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=1200&q=80');">
-    <div class="section-label">Wer wir sind</div>
+  <div class="page-header" style="background-image:linear-gradient(160deg,rgba(26,58,92,0.9),rgba(45,89,134,0.8)),url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=1400&q=80');">
+    <span class="section-label">Wer wir sind</span>
     <h1>Über uns</h1>
     <p>Handwerk mit Leidenschaft – seit vielen Jahren Ihr zuverlässiger Partner in der Region.</p>
   </div>
-  <section>
+  <section class="ueber-intro">
+    <div class="container"><div class="ueber-grid">
+      <div class="ueber-img-wrap reveal-left">
+        <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=700&q=80" alt="Unser Team"/>
+      </div>
+      <div class="reveal-right">
+        <span class="section-label">Unser Betrieb</span>
+        <h2 class="section-title">Handwerk mit Erfahrung & Herz</h2>
+        <div class="years-box"><strong>[XX]</strong><small>Jahre Erfahrung</small></div>
+        <p style="color:var(--text-mid);font-weight:300;margin-bottom:1rem">[Ihr persönlicher Text: Wer Sie sind, wie der Betrieb entstanden ist, was Ihnen bei der Arbeit wichtig ist.]</p>
+        <p style="color:var(--text-mid);font-weight:300">[Zweiter Absatz: Servicegebiet, Werte, was Sie von anderen unterscheidet.]</p>
+        <ul class="check-list" style="margin-top:1.5rem">
+          <li>Inhabergeführter Familienbetrieb</li>
+          <li>Langjährige Erfahrung in der Region</li>
+          <li>Alle Arbeiten nach aktueller Norm & DVGW</li>
+          <li>Sauber, pünktlich, verlässlich</li>
+          <li>Kostenlose Erstberatung</li>
+        </ul>
+      </div>
+    </div></div>
+  </section>
+  <section class="werte-section">
     <div class="container">
-      <div class="ueber-layout">
-        <div class="ueber-img">
-          <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=600&q=80" alt="Handwerker" />
-        </div>
-        <div>
-          <div class="section-label">Unser Betrieb</div>
-          <h2 class="section-title">Handwerk mit<br>Erfahrung & Herz</h2>
-          <div class="years-badge">XX<small>Jahre</small></div>
-          <p style="color:var(--text-muted);font-weight:300;margin-bottom:1rem;">[Ihr persönlicher Text: Wer Sie sind, wie der Betrieb entstanden ist, was Ihnen wichtig ist – Zuverlässigkeit, Qualität, persönlicher Kontakt.]</p>
-          <p style="color:var(--text-muted);font-weight:300;">[Zweiter Absatz: Servicegebiet, Werte, was Sie von anderen unterscheidet.]</p>
-          <ul class="check-list">
-            <li>Inhabergeführter Familienbetrieb</li>
-            <li>Langjährige Erfahrung in der Region</li>
-            <li>Alle Arbeiten nach aktueller Norm & DVGW</li>
-            <li>Sauber, pünktlich, verlässlich</li>
-            <li>Kostenlose Erstberatung</li>
-          </ul>
-        </div>
+      <div class="reveal" style="text-align:center;max-width:580px;margin:0 auto 3rem">
+        <span class="section-label">Was uns ausmacht</span>
+        <h2 class="section-title">Unsere Werte</h2>
+      </div>
+      <div class="werte-grid">
+        <div class="wert-card reveal"><h4>Verlässlichkeit</h4><p>Wir halten was wir versprechen – pünktliche Termine, transparente Preise, ehrliche Beratung.</p></div>
+        <div class="wert-card reveal"><h4>Qualität</h4><p>Nur bestens ausgebildetes Fachpersonal, hochwertige Materialien und Arbeit nach aktuellen Normen.</p></div>
+        <div class="wert-card reveal"><h4>Persönlichkeit</h4><p>Kein Call-Center, keine Nummern – Sie sprechen immer direkt mit uns. So wie es sein soll.</p></div>
+        <div class="wert-card reveal"><h4>Schnelligkeit</h4><p>Kurze Reaktionszeiten, zügige Umsetzung. Und bei Notfällen sind wir rund um die Uhr erreichbar.</p></div>
       </div>
     </div>
   </section>
-  <section style="background:var(--cream);">
+  <section class="team-section">
     <div class="container">
-      <div class="section-label">Das Team</div>
+      <span class="section-label">Das Team</span>
       <h2 class="section-title">Ihre Ansprechpartner</h2>
       <p class="section-sub">[Optional: Stellen Sie sich und Ihre Mitarbeiter kurz vor.]</p>
       <div class="team-grid">
-        <div class="team-card"><div class="team-avatar">M</div><h4>Max Mustermann</h4><span>Inhaber & Meister</span></div>
-        <div class="team-card"><div class="team-avatar">?</div><h4>[Name]</h4><span>[Position / Funktion]</span></div>
-        <div class="team-card"><div class="team-avatar">?</div><h4>[Name]</h4><span>[Position / Funktion]</span></div>
+        <div class="team-card reveal"><div class="team-avatar">A</div><h4>[Vorname Nachname]</h4><span>Inhaber & Geschäftsführer</span></div>
+        <div class="team-card reveal"><div class="team-avatar">?</div><h4>[Name]</h4><span>[Position]</span></div>
+        <div class="team-card reveal"><div class="team-avatar">?</div><h4>[Name]</h4><span>[Position]</span></div>
       </div>
     </div>
   </section>
-  <div class="cta-banner">
-    <h2>Lernen Sie uns persönlich kennen.</h2>
-    <p>Rufen Sie uns an oder stellen Sie direkt eine Anfrage.</p>
-    <button class="btn btn-white" onclick="navigate('kontakt')">Kontakt aufnehmen →</button>
-  </div>
-  <footer><p>© 2025 A&amp;S Gebäudetechnik · <a href="#" onclick="navigate('impressum');return false;">Impressum</a> · <a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></p></footer>
+  <div class="cta-section"><div class="container reveal">
+    <span class="section-label">Sprechen Sie uns an</span>
+    <h2 class="section-title" style="margin:0 auto 0.8rem">Lernen Sie uns kennen.</h2>
+    <p>Rufen Sie uns an oder stellen Sie direkt eine Anfrage – wir freuen uns auf Sie.</p>
+    <div class="cta-actions"><button class="btn btn-primary" onclick="navigate('kontakt')">Kontakt aufnehmen</button></div>
+  </div></div>
+  <footer class="site-footer"><div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding:1.5rem 2rem"><p style="color:rgba(255,255,255,0.3);font-size:0.8rem">© 2025 A&amp;S Gebäudetechnik GmbH</p><div class="footer-bottom-links"><a href="#" onclick="navigate('impressum');return false;">Impressum</a><a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></div></div></footer>
 </div>
 
-<!-- ══════════════════════════
+<!-- ══════════════════════════════════
      ANFRAGE
-══════════════════════════ -->
+══════════════════════════════════ -->
 <div class="page" id="page-anfrage">
-  <div class="page-header" style="background-image:linear-gradient(155deg,rgba(30,32,34,0.9),rgba(44,36,24,0.82)),url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80');">
-    <div class="section-label">Schreiben Sie uns</div>
+  <div class="page-header">
+    <span class="section-label">Schreiben Sie uns</span>
     <h1>Anfrage stellen</h1>
     <p>Kostenlos und unverbindlich – wir melden uns innerhalb von 24 Stunden.</p>
   </div>
-  <div class="anfrage-info">
-    <div class="anfrage-info-item"><div class="ai-icon">⏱️</div><div><strong>Schnelle Antwort</strong><span>Wir antworten innerhalb von 24 Stunden auf Ihre Anfrage.</span></div></div>
-    <div class="anfrage-info-item"><div class="ai-icon">💬</div><div><strong>Persönliche Beratung</strong><span>Kein Call-Center – Sie sprechen direkt mit dem Betrieb.</span></div></div>
-    <div class="anfrage-info-item"><div class="ai-icon">💶</div><div><strong>Kostenloses Angebot</strong><span>Erstberatung und Angebot sind für Sie kostenlos.</span></div></div>
-  </div>
-  <div class="form-wrap">
-    <div class="container">
-      <div class="section-label">Anfrage</div>
-      <h2 class="section-title">Wie können wir Ihnen helfen?</h2>
-      <p class="section-sub">Füllen Sie das Formular aus – wir melden uns schnellstmöglich bei Ihnen.</p>
+  <div class="anfrage-wrap">
+    <div class="anfrage-sidebar">
+      <span class="section-label">Warum A&amp;S?</span>
+      <h2 class="section-title">Ihr direkter Draht zu uns</h2>
+      <p class="section-sub">Kein Call-Center, keine langen Wartezeiten.</p>
+      <div class="anfrage-info-item"><div class="ai-icon">⏱️</div><div><strong>Antwort innerhalb 24h</strong><span>Wir melden uns schnell und persönlich bei Ihnen.</span></div></div>
+      <div class="anfrage-info-item"><div class="ai-icon">💬</div><div><strong>Persönliche Beratung</strong><span>Sie sprechen direkt mit dem Fachmann.</span></div></div>
+      <div class="anfrage-info-item"><div class="ai-icon">💶</div><div><strong>Kostenloses Angebot</strong><span>Erstberatung und Angebot immer kostenlos.</span></div></div>
+      <div class="anfrage-info-item"><div class="ai-icon">⚠️</div><div><strong>Notdienst 24/7</strong><span>Bei Notfällen sofort: +49 XXX XXXXXXX</span></div></div>
+    </div>
+    <div class="anfrage-form-wrap">
+      <span class="section-label">Kontaktformular</span>
+      <h2 class="section-title" style="font-size:1.8rem;margin-bottom:0.5rem">Wie können wir Ihnen helfen?</h2>
+      <p style="color:var(--text-light);margin-bottom:2rem;font-size:0.9rem">Füllen Sie das Formular aus – wir melden uns schnellstmöglich.</p>
       <div class="form-grid" id="contactForm">
-        <div class="form-group"><label>Vorname</label><input type="text" placeholder="Max" id="f-vorname" /></div>
-        <div class="form-group"><label>Nachname</label><input type="text" placeholder="Mustermann" id="f-nachname" /></div>
-        <div class="form-group"><label>Telefon</label><input type="tel" placeholder="+49 ..." id="f-tel" /></div>
-        <div class="form-group"><label>E-Mail</label><input type="email" placeholder="max@beispiel.de" id="f-mail" /></div>
-        <div class="form-group full">
-          <label>Gewünschte Leistung</label>
+        <div class="form-group"><label>Vorname</label><input type="text" placeholder="Max" id="f-vorname"/></div>
+        <div class="form-group"><label>Nachname</label><input type="text" placeholder="Mustermann" id="f-nachname"/></div>
+        <div class="form-group"><label>Telefon</label><input type="tel" placeholder="+49 ..."/></div>
+        <div class="form-group"><label>E-Mail</label><input type="email" placeholder="max@beispiel.de" id="f-mail"/></div>
+        <div class="form-group full"><label>Gewünschte Leistung</label>
           <select id="f-leistung">
             <option value="">– Bitte wählen –</option>
             <option>Heizungswartung</option>
@@ -569,242 +794,180 @@
             <option>Sonstiges</option>
           </select>
         </div>
-        <div class="form-group full">
-          <label>Ihre Nachricht</label>
-          <textarea placeholder="Bitte beschreiben Sie kurz Ihr Anliegen, z.B. Art des Problems, Adresse …" id="f-msg"></textarea>
-        </div>
+        <div class="form-group full"><label>Ihre Nachricht</label><textarea placeholder="Bitte beschreiben Sie kurz Ihr Anliegen …" id="f-msg"></textarea></div>
       </div>
       <div class="form-submit">
-        <button class="btn-submit" onclick="submitForm()">Anfrage absenden →</button>
-        <p class="form-note">* Ihre Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.</p>
+        <p class="form-note">* Ihre Daten werden vertraulich behandelt und nicht weitergegeben.</p>
+        <button class="btn btn-primary" onclick="submitForm()">Anfrage absenden →</button>
       </div>
       <div class="success-msg" id="successMsg">✅ Vielen Dank! Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden bei Ihnen.</div>
     </div>
   </div>
-  <footer><p>© 2025 A&amp;S Gebäudetechnik · <a href="#" onclick="navigate('impressum');return false;">Impressum</a> · <a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></p></footer>
+  <footer class="site-footer"><div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding:1.5rem 2rem"><p style="color:rgba(255,255,255,0.3);font-size:0.8rem">© 2025 A&amp;S Gebäudetechnik GmbH</p><div class="footer-bottom-links"><a href="#" onclick="navigate('impressum');return false;">Impressum</a><a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></div></div></footer>
 </div>
 
-<!-- ══════════════════════════
+<!-- ══════════════════════════════════
      KONTAKT
-══════════════════════════ -->
+══════════════════════════════════ -->
 <div class="page" id="page-kontakt">
-  <div class="page-header" style="background-image:linear-gradient(155deg,rgba(30,32,34,0.9),rgba(44,36,24,0.82)),url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1200&q=80');">
-    <div class="section-label">Sprechen Sie uns an</div>
+  <div class="page-header">
+    <span class="section-label">Sprechen Sie uns an</span>
     <h1>Kontakt</h1>
     <p>Wir sind für Sie da – telefonisch, per E-Mail oder direkt vor Ort.</p>
   </div>
-  <section>
-    <div class="container">
-      <div class="kontakt-layout">
-        <div class="kontakt-info-block">
-          <div class="kontakt-row">
-            <div class="kr-icon">📞</div>
-            <div><strong>+49 XXX XXXXXXX</strong><span>Mo bis Fr, 7:00–18:00 Uhr</span></div>
-          </div>
-          <div class="kontakt-row">
-            <div class="kr-icon">✉️</div>
-            <div><strong><a href="mailto:info@as-gebaeudetechnik.de">info@as-gebaeudetechnik.de</a></strong><span>Wir antworten innerhalb von 24 Stunden</span></div>
-          </div>
-          <div class="kontakt-row">
-            <div class="kr-icon">📍</div>
-            <div><strong>Musterstraße 1<br>12345 Musterstadt</strong><span>Servicegebiet: [z.B. Musterstadt und Umkreis 30 km]</span></div>
-          </div>
-          <div class="oeffnungszeiten">
-            <h4>Öffnungszeiten</h4>
-            <div class="oz-row"><span class="day">Montag – Freitag</span><span class="time">07:00 – 18:00 Uhr</span></div>
-            <div class="oz-row"><span class="day">Samstag</span><span class="time">08:00 – 13:00 Uhr</span></div>
-            <div class="oz-row"><span class="day">Sonntag</span><span class="time">Geschlossen</span></div>
-          </div>
-          <div class="notdienst-banner">
-            <div class="nd-icon">🚨</div>
-            <div>
-              <strong>Notdienst</strong>
-              <span>Außerhalb der Öffnungszeiten erreichbar unter</span><br>
-              <a href="tel:+49XXXXXXXXX">+49 XXX XXXXXXX (Notfall)</a>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="map-placeholder">
-            <div class="mp-icon">🗺️</div>
-            <strong>Hier kommt Ihre Google Maps Karte hin</strong>
-            <p>Einbettungscode von Google Maps einfügen,<br>um Ihren Standort anzuzeigen.</p>
-            <p style="margin-top:0.5rem;font-size:0.78rem;">maps.google.com → Teilen → Karte einbetten</p>
-          </div>
-          <div style="margin-top:2rem;background:var(--cream);padding:1.8rem;border-left:4px solid var(--copper);">
-            <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.8rem;">Lieber direkt schreiben?</h4>
-            <p style="color:var(--text-muted);font-size:0.92rem;margin-bottom:1.2rem;">Nutzen Sie unser Anfrageformular – wir melden uns schnellstmöglich bei Ihnen.</p>
-            <button class="btn" onclick="navigate('anfrage')">Zum Anfrage-Formular →</button>
-          </div>
-        </div>
+  <div class="kontakt-layout container">
+    <div class="kontakt-info">
+      <div class="k-row reveal"><div class="k-icon-box">📞</div><div><strong>+49 XXX XXXXXXX</strong><span>Mo–Fr 7:00–18:00 · Sa 8:00–13:00 Uhr</span></div></div>
+      <div class="k-row reveal"><div class="k-icon-box">✉️</div><div><strong><a href="mailto:info@as-gebaeudetechnik.de">info@as-gebaeudetechnik.de</a></strong><span>Antwort innerhalb von 24 Stunden</span></div></div>
+      <div class="k-row reveal"><div class="k-icon-box">📍</div><div><strong>[Straße] [Nr.]<br>[PLZ] [Stadt]</strong><span>Servicegebiet: [Region / Umkreis]</span></div></div>
+      <div class="oeffnungszeiten reveal">
+        <h4>Öffnungszeiten</h4>
+        <div class="oz-row"><span class="day">Montag – Freitag</span><span class="time">07:00 – 18:00 Uhr</span></div>
+        <div class="oz-row"><span class="day">Samstag</span><span class="time">08:00 – 13:00 Uhr</span></div>
+        <div class="oz-row"><span class="day">Sonntag</span><span class="time">Geschlossen</span></div>
+      </div>
+      <div class="notdienst-card reveal">
+        <div class="nd-icon">🚨</div>
+        <div><strong>Telefonischer Notdienst</strong><span style="color:rgba(255,255,255,0.55);font-size:0.85rem;display:block;margin-bottom:0.3rem">Rund um die Uhr erreichbar</span><a href="tel:+49XXXXXXXXX">+49 XXX XXXXXXX</a></div>
       </div>
     </div>
-  </section>
-  <footer><p>© 2025 A&amp;S Gebäudetechnik · <a href="#" onclick="navigate('impressum');return false;">Impressum</a> · <a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></p></footer>
+    <div class="reveal-right">
+      <div class="map-box">
+        <div class="mp-icon">🗺️</div>
+        <strong style="color:var(--blue)">Hier Ihre Google Maps Karte einfügen</strong>
+        <p>maps.google.com → Teilen → Karte einbetten → Code hier einfügen</p>
+      </div>
+      <div style="margin-top:2rem;background:var(--blue-light);padding:2rem;border-left:4px solid var(--orange)">
+        <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--blue);margin-bottom:0.6rem">Lieber direkt schreiben?</h4>
+        <p style="color:var(--text-mid);font-size:0.9rem;margin-bottom:1.2rem">Nutzen Sie unser Anfrageformular – schnell und unkompliziert.</p>
+        <button class="btn btn-primary" onclick="navigate('anfrage')">Zum Anfrageformular →</button>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer"><div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding:1.5rem 2rem"><p style="color:rgba(255,255,255,0.3);font-size:0.8rem">© 2025 A&amp;S Gebäudetechnik GmbH</p><div class="footer-bottom-links"><a href="#" onclick="navigate('impressum');return false;">Impressum</a><a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></div></div></footer>
 </div>
 
-
-<!-- ══════════════════════════
+<!-- ══════════════════════════════════
      IMPRESSUM
-══════════════════════════ -->
+══════════════════════════════════ -->
 <div class="page" id="page-impressum">
-  <div class="legal-page">
-    <span class="back-btn" onclick="navigate('start')">← Zurück zur Startseite</span>
+  <div class="legal-wrap">
+    <a class="back-link" onclick="navigate('start');return false;" href="#">← Zurück</a>
     <h1>Impressum</h1>
     <p class="legal-intro">Angaben gemäß § 5 TMG</p>
-
     <h2>Unternehmensangaben</h2>
-    <div class="placeholder">✓ A&amp;S Gebäudetechnik GmbH</div>
-    <p>A&amp;S Gebäudetechnik GmbH<br>
-    [Straße und Hausnummer]<br>
-    [PLZ] [Stadt]</p>
-
+    <div class="placeholder-box">▶ Vollständige Firmenadresse eintragen</div>
+    <p>A&amp;S Gebäudetechnik GmbH<br>[Straße und Hausnummer]<br>[PLZ] [Stadt]</p>
     <h2>Vertreten durch</h2>
-    <div class="placeholder">▶ Geschäftsführer eintragen</div>
+    <div class="placeholder-box">▶ Geschäftsführer eintragen</div>
     <p>Geschäftsführer: [Vorname Nachname]</p>
-
     <h2>Kontakt</h2>
-    <p>Telefon: +49 XXX XXXXXXX<br>
-    E-Mail: info@as-gebaeudetechnik.de</p>
-
+    <p>Telefon: +49 XXX XXXXXXX<br>E-Mail: info@as-gebaeudetechnik.de</p>
     <h2>Handelsregister</h2>
-    <div class="placeholder">▶ Registernummer und Registergericht eintragen</div>
-    <p>Registergericht: Amtsgericht [Stadt]<br>
-    Registernummer: HRB XXXXX</p>
-
+    <div class="placeholder-box">▶ Registernummer und Amtsgericht eintragen</div>
+    <p>Registergericht: Amtsgericht [Stadt]<br>Registernummer: HRB XXXXX</p>
     <h2>Umsatzsteuer-ID</h2>
-    <div class="placeholder">▶ USt-IdNr. eintragen (falls vorhanden)</div>
-    <p>Umsatzsteuer-Identifikationsnummer gemäß §27a Umsatzsteuergesetz:<br>
-    DE XXXXXXXXX</p>
-
+    <div class="placeholder-box">▶ USt-IdNr. eintragen</div>
+    <p>Umsatzsteuer-Identifikationsnummer gemäß §27a UStG: DE XXXXXXXXX</p>
     <h2>Berufsrechtliche Angaben</h2>
-    <p>Zuständige Handwerkskammer: [Name der Handwerkskammer]<br>
-    Berufsbezeichnung: Anlagenmechaniker SHK / Gebäudetechniker<br>
-    Verliehen in: Deutschland</p>
-
-    <h2>Berufshaftpflichtversicherung</h2>
-    <div class="placeholder">▶ Optional: Versicherungsangaben eintragen</div>
-    <p>[Name der Versicherung]<br>
-    [Adresse der Versicherung]<br>
-    Geltungsraum der Versicherung: Deutschland</p>
-
+    <p>Zuständige Handwerkskammer: [Name]<br>Berufsbezeichnung: Anlagenmechaniker SHK / Gebäudetechniker<br>Verliehen in: Deutschland</p>
     <h2>Streitschlichtung</h2>
-    <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>.<br>
-    Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
-    <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
-
+    <p>Die EU-Kommission stellt eine Plattform zur Online-Streitbeilegung bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>. Wir sind nicht verpflichtet, an Streitbeilegungsverfahren teilzunehmen.</p>
     <h2>Haftung für Inhalte</h2>
-    <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.</p>
-
-    <h2>Haftung für Links</h2>
-    <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
-
+    <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.</p>
     <h2>Urheberrecht</h2>
-    <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+    <p>Die durch uns erstellten Inhalte unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung oder Verbreitung bedürfen der schriftlichen Zustimmung.</p>
   </div>
-  <footer><p>© 2025 A&amp;S Gebäudetechnik · <a href="#" onclick="navigate('impressum');return false;">Impressum</a> · <a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></p></footer>
+  <footer class="site-footer"><div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding:1.5rem 2rem"><p style="color:rgba(255,255,255,0.3);font-size:0.8rem">© 2025 A&amp;S Gebäudetechnik GmbH</p><div class="footer-bottom-links"><a href="#" onclick="navigate('impressum');return false;">Impressum</a><a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></div></div></footer>
 </div>
 
-<!-- ══════════════════════════
+<!-- ══════════════════════════════════
      DATENSCHUTZ
-══════════════════════════ -->
+══════════════════════════════════ -->
 <div class="page" id="page-datenschutz">
-  <div class="legal-page">
-    <span class="back-btn" onclick="navigate('start')">← Zurück zur Startseite</span>
+  <div class="legal-wrap">
+    <a class="back-link" onclick="navigate('start');return false;" href="#">← Zurück</a>
     <h1>Datenschutzerklärung</h1>
     <p class="legal-intro">Informationen gemäß Art. 13 DSGVO</p>
-
     <h2>1. Verantwortlicher</h2>
-    <div class="placeholder">▶ Firmenname und Adresse eintragen</div>
-    <p>A&amp;S Gebäudetechnik GmbH<br>
-    [Straße] [Nr.]<br>
-    [PLZ] [Stadt]<br>
-    E-Mail: info@as-gebaeudetechnik.de<br>
-    Telefon: +49 XXX XXXXXXX</p>
-
-    <h2>2. Erhebung und Speicherung personenbezogener Daten</h2>
-    <p>Beim Besuch unserer Website werden durch den Browser automatisch Informationen an den Server übermittelt. Diese werden temporär in einem sogenannten Server-Log gespeichert:</p>
-    <ul>
-      <li>IP-Adresse des anfragenden Rechners</li>
-      <li>Datum und Uhrzeit des Zugriffs</li>
-      <li>Name und URL der abgerufenen Datei</li>
-      <li>Betriebssystem und Browser des anfragenden Rechners</li>
-    </ul>
-    <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigte Interessen).</p>
-
-    <h2>3. Kontaktformular</h2>
-    <p>Wenn Sie uns über das Kontaktformular eine Anfrage zukommen lassen, werden Ihre Angaben zur Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Eine Weitergabe an Dritte erfolgt nicht.</p>
-    <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung).</p>
-
-    <h2>4. Weitergabe von Daten</h2>
-    <p>Eine Übermittlung Ihrer persönlichen Daten an Dritte zu anderen als den im Folgenden aufgeführten Zwecken findet nicht statt. Wir geben Ihre persönlichen Daten nur an Dritte weiter, wenn Sie ausdrücklich eingewilligt haben oder dies zur Vertragserfüllung erforderlich ist.</p>
-
+    <div class="placeholder-box">▶ Vollständige Adresse eintragen</div>
+    <p>A&amp;S Gebäudetechnik GmbH<br>[Straße] [Nr.], [PLZ] [Stadt]<br>E-Mail: info@as-gebaeudetechnik.de · Tel: +49 XXX XXXXXXX</p>
+    <h2>2. Cookies</h2>
+    <p>Diese Website verwendet Cookies. Technisch notwendige Cookies sind für den Betrieb der Seite erforderlich. Mit Ihrer Einwilligung setzen wir ggf. weitere Cookies zur Analyse und Optimierung ein. Sie können Ihre Einwilligung jederzeit widerrufen.</p>
+    <h2>3. Erhebung personenbezogener Daten</h2>
+    <p>Beim Besuch unserer Website werden automatisch Informationen an den Server übermittelt (IP-Adresse, Datum/Uhrzeit, aufgerufene Seite, Browser/OS). Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.</p>
+    <h2>4. Kontaktformular</h2>
+    <p>Ihre Angaben im Kontaktformular werden zur Bearbeitung Ihrer Anfrage gespeichert. Eine Weitergabe an Dritte erfolgt nicht. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.</p>
     <h2>5. Ihre Rechte</h2>
-    <p>Sie haben folgende Rechte gegenüber uns bezüglich Ihrer personenbezogenen Daten:</p>
     <ul>
-      <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
-      <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
-      <li>Recht auf Löschung (Art. 17 DSGVO)</li>
-      <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-      <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
-      <li>Recht auf Widerspruch (Art. 21 DSGVO)</li>
+      <li>Auskunft (Art. 15 DSGVO)</li><li>Berichtigung (Art. 16 DSGVO)</li>
+      <li>Löschung (Art. 17 DSGVO)</li><li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+      <li>Datenübertragbarkeit (Art. 20 DSGVO)</li><li>Widerspruch (Art. 21 DSGVO)</li>
     </ul>
-    <p>Zur Ausübung dieser Rechte wenden Sie sich bitte an die oben genannte E-Mail-Adresse.</p>
-
+    <p>Zur Ausübung wenden Sie sich an: info@as-gebaeudetechnik.de</p>
     <h2>6. Beschwerderecht</h2>
-    <p>Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten durch uns zu beschweren. Zuständige Aufsichtsbehörde in NRW ist der Landesbeauftragte für Datenschutz und Informationsfreiheit NRW.</p>
-
-    <h2>7. Cookies</h2>
-    <p>Diese Website verwendet keine Tracking-Cookies oder Analyse-Tools. Es werden ausschließlich technisch notwendige Funktionen genutzt.</p>
-
-    <h2>8. Hosting</h2>
-    <div class="placeholder">▶ Hosting-Anbieter eintragen (z.B. IONOS, Strato, All-Inkl etc.)</div>
-    <p>Diese Website wird gehostet bei: [Name des Hosters], [Adresse]. Der Hoster verarbeitet Daten in unserem Auftrag gemäß Art. 28 DSGVO.</p>
-
-    <h2>9. Aktualität dieser Datenschutzerklärung</h2>
-    <p>Stand: [Monat] [Jahr]. Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen.</p>
+    <p>Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</p>
+    <h2>7. Hosting</h2>
+    <div class="placeholder-box">▶ Hosting-Anbieter eintragen (z.B. IONOS, Strato, All-Inkl)</div>
+    <p>Diese Website wird gehostet bei: [Hoster], [Adresse]. Auftragsverarbeitung gemäß Art. 28 DSGVO.</p>
+    <h2>8. Aktualität</h2>
+    <div class="placeholder-box">▶ Datum eintragen</div>
+    <p>Stand: [Monat Jahr]</p>
   </div>
-  <footer><p>© 2025 A&amp;S Gebäudetechnik · <a href="#" onclick="navigate('impressum');return false;">Impressum</a> · <a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></p></footer>
+  <footer class="site-footer"><div class="footer-bottom" style="max-width:1200px;margin:0 auto;padding:1.5rem 2rem"><p style="color:rgba(255,255,255,0.3);font-size:0.8rem">© 2025 A&amp;S Gebäudetechnik GmbH</p><div class="footer-bottom-links"><a href="#" onclick="navigate('impressum');return false;">Impressum</a><a href="#" onclick="navigate('datenschutz');return false;">Datenschutz</a></div></div></footer>
 </div>
 
 <script>
-  function navigate(page) {
-    var target = document.getElementById('page-' + page);
-    if (!target) return;
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    target.classList.add('active');
+// ── NAVIGATE ──
+function navigate(page){
+  var t=document.getElementById('page-'+page);
+  if(!t)return;
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  t.classList.add('active');
+  document.querySelectorAll('[data-page]').forEach(function(a){a.classList.toggle('active',a.dataset.page===page)});
+  document.querySelectorAll('[data-mpage]').forEach(function(a){a.classList.toggle('active',a.dataset.mpage===page)});
+  document.getElementById('mobileMenu').classList.remove('open');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(checkReveal,100);
+}
 
-    document.querySelectorAll('[data-page]').forEach(a => {
-      a.classList.toggle('active', a.dataset.page === page);
-    });
-    document.querySelectorAll('[data-mpage]').forEach(a => {
-      a.classList.toggle('active', a.dataset.mpage === page);
-    });
+// ── HAMBURGER ──
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
 
-    document.getElementById('mobileMenu').classList.remove('open');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+// ── SCROLL EFFECTS ──
+function checkReveal(){
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight-80){el.classList.add('visible')}
+  });
+}
+window.addEventListener('scroll',checkReveal);
+window.addEventListener('load',checkReveal);
 
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
+// ── NAV SCROLL ──
+window.addEventListener('scroll',function(){
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>30);
+});
 
-  function submitForm() {
-    const vorname  = document.getElementById('f-vorname').value.trim();
-    const nachname = document.getElementById('f-nachname').value.trim();
-    const tel      = document.getElementById('f-tel').value.trim();
-    const mail     = document.getElementById('f-mail').value.trim();
-    const leistung = document.getElementById('f-leistung').value;
-    if (!vorname || !nachname || (!tel && !mail) || !leistung) {
-      alert('Bitte füllen Sie alle Pflichtfelder aus (Name, Kontakt, Leistung).');
-      return;
-    }
-    document.getElementById('successMsg').style.display = 'block';
-    document.getElementById('contactForm').style.opacity = '0.3';
-    document.getElementById('contactForm').style.pointerEvents = 'none';
-    document.querySelector('.form-submit').style.display = 'none';
-    document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
+// ── FORM ──
+function submitForm(){
+  var v=document.getElementById('f-vorname').value.trim();
+  var n=document.getElementById('f-nachname').value.trim();
+  var m=document.getElementById('f-mail').value.trim();
+  var l=document.getElementById('f-leistung').value;
+  if(!v||!n||!m||!l){alert('Bitte füllen Sie alle Pflichtfelder aus.');return;}
+  document.getElementById('successMsg').style.display='block';
+  document.getElementById('contactForm').style.opacity='0.3';
+  document.getElementById('contactForm').style.pointerEvents='none';
+  document.querySelector('.form-submit').style.display='none';
+  document.getElementById('successMsg').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// ── COOKIES ──
+function acceptCookies(){localStorage.setItem('cookies','all');closeCookies()}
+function acceptEssential(){localStorage.setItem('cookies','essential');closeCookies()}
+function closeCookies(){document.getElementById('cookieBanner').style.display='none'}
+if(localStorage.getItem('cookies')){closeCookies()}
 </script>
 </body>
 </html>
