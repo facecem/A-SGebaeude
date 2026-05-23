@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -930,6 +931,31 @@ function navigate(page){
   window.scrollTo({top:0,behavior:'smooth'});
   setTimeout(checkReveal,100);
 }
+
+// ── COUNTER UP ──
+function animateCounter(el){
+  var target=parseInt(el.dataset.target);
+  var duration=1800;
+  var start=performance.now();
+  function step(now){
+    var progress=Math.min((now-start)/duration,1);
+    var ease=1-Math.pow(1-progress,3);
+    el.textContent=Math.floor(ease*target);
+    if(progress<1)requestAnimationFrame(step);
+    else el.textContent=target;
+  }
+  requestAnimationFrame(step);
+}
+var countersDone=false;
+function checkCounters(){
+  if(countersDone)return;
+  document.querySelectorAll('[data-target]').forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight-50){animateCounter(el);countersDone=true;}
+  });
+}
+window.addEventListener('scroll',checkCounters);
+window.addEventListener('load',checkCounters);
 
 // ── HAMBURGER ──
 function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
