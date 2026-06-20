@@ -308,7 +308,7 @@ export default function Home() {
             <div className="overflow-hidden">
               <motion.img
                 src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=700&q=80"
-                alt="Monteur der A&S Gebäudetechnik GmbH bei der Wartung einer Heizungsanlage in Herzogenrath"
+                alt="Monteur der AS Gebäudetechnik GmbH bei der Wartung einer Heizungsanlage in Herzogenrath"
                 className="w-full object-cover h-[480px] filter contrast-105 group-hover:scale-105 transition-transform duration-700"
               />
             </div>

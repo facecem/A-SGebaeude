@@ -6,7 +6,7 @@ import { useSeo } from "@/hooks/useSeo";
 export default function Datenschutz() {
   useSeo({
     title: "Datenschutzerklärung",
-    description: "Datenschutzerklärung der A&S Gebäudetechnik GmbH gemäß DSGVO.",
+    description: "Datenschutzerklärung der AS Gebäudetechnik GmbH gemäß DSGVO.",
     path: "/datenschutz",
   });
   const [, setLocation] = useLocation();
@@ -39,7 +39,7 @@ export default function Datenschutz() {
 
           <h2 className="font-serif text-xl text-[#1a3a5c] mt-8 mb-3">1. Verantwortlicher</h2>
           <p className="text-[#4a5568] font-light text-sm leading-relaxed mb-3">
-            Verantwortlich im Sinne der Datenschutz-Grundverordnung (DSGVO) ist: A&S Gebäudetechnik
+            Verantwortlich im Sinne der Datenschutz-Grundverordnung (DSGVO) ist: AS Gebäudetechnik
             GmbH, Eurode-Park 1-4, 52134 Herzogenrath, info@as-versorgung.de
           </p>
 

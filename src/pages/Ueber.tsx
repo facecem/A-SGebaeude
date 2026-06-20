@@ -18,7 +18,7 @@ const team = [
 export default function Ueber() {
   useSeo({
     title: "Über uns – Ihr Gebäudetechnik-Fachbetrieb",
-    description: "A&S Gebäudetechnik GmbH: gegründet 2024, Standorte in Herzogenrath und Köln. Eigene Monteure, persönliche Betreuung, moderne Lösungen für Heizung und Sanitär.",
+    description: "AS Gebäudetechnik GmbH: gegründet 2024, Standorte in Herzogenrath und Köln. Eigene Monteure, persönliche Betreuung, moderne Lösungen für Heizung und Sanitär.",
     path: "/ueber",
   });
   const [, setLocation] = useLocation();
@@ -51,7 +51,7 @@ export default function Ueber() {
           </span>
           <h1 className="font-serif text-5xl text-white mb-4">Über uns</h1>
           <p className="text-white/70 font-light text-lg max-w-xl mx-auto">
-            Qualität, Verlässlichkeit und Leidenschaft für Gebäudetechnik – das ist A&S.
+            Qualität, Verlässlichkeit und Leidenschaft für Gebäudetechnik – das ist AS.
           </p>
         </motion.div>
       </div>
@@ -69,7 +69,7 @@ export default function Ueber() {
             <div className="overflow-hidden relative z-10">
               <img
                 src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=700&q=80"
-                alt="Team der A&S Gebäudetechnik GmbH – Fachbetrieb für Heizung und Sanitär"
+                alt="Team der AS Gebäudetechnik GmbH – Fachbetrieb für Heizung und Sanitär"
                 className="w-full h-[420px] object-cover filter contrast-105 hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -91,7 +91,7 @@ export default function Ueber() {
               Jung. Regional. Verlässlich.
             </h2>
             <p className="text-[#4a5568] font-light leading-relaxed mb-4">
-              Die A&S Gebäudetechnik GmbH wurde 2024 gegründet und ist beim Amtsgericht Aachen
+              Die AS Gebäudetechnik GmbH wurde 2024 gegründet und ist beim Amtsgericht Aachen
               im Handelsregister eingetragen. Mit Standorten in Herzogenrath und Köln betreuen
               wir Kunden in Herzogenrath, Aachen, Würselen, Alsdorf, Baesweiler, Eschweiler und
               Stolberg sowie in den Regionen Düren, Heinsberg, Köln und Mönchengladbach.

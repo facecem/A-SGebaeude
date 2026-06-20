@@ -11,7 +11,7 @@ const hours = [
 export default function Kontakt() {
   useSeo({
     title: "Kontakt – Herzogenrath & Köln",
-    description: "Kontaktieren Sie A&S Gebäudetechnik GmbH: Telefon, E-Mail oder Kontaktformular. Standorte in Herzogenrath und Köln, 24/7-Notdienst.",
+    description: "Kontaktieren Sie AS Gebäudetechnik GmbH: Telefon, E-Mail oder Kontaktformular. Standorte in Herzogenrath und Köln, 24/7-Notdienst.",
     path: "/kontakt",
   });
   const [submitted, setSubmitted] = useState(false);

@@ -30,11 +30,11 @@ export default function Footer() {
           <div className="flex items-center gap-2.5 mb-1">
             <img
               src={logoIcon}
-              alt="A&S Gebäudetechnik Logo"
+              alt="AS Gebäudetechnik Logo"
               className="h-9 w-9"
             />
             <div className="font-serif text-xl font-bold">
-              <span className="text-[#e8621a]">A&S</span>{" "}
+              <span className="text-[#e8621a]">AS</span>{" "}
               <span className="text-white/50">Gebäudetechnik GmbH</span>
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10 max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-3">
         <p className="text-white/30 text-xs">
-          © 2025 A&S Gebäudetechnik GmbH. Alle Rechte vorbehalten.
+          © 2025 AS Gebäudetechnik GmbH. Alle Rechte vorbehalten.
         </p>
         <div className="flex gap-5">
           <button

@@ -77,12 +77,12 @@ export default function Navbar() {
             >
               <img
                 src={logoIcon}
-                alt="A&S Gebäudetechnik Logo"
+                alt="AS Gebäudetechnik Logo"
                 className="h-10 w-10"
               />
               <span className="flex flex-col leading-none">
                 <span className="font-serif text-lg font-bold tracking-tight">
-                  <span className="text-[#e8621a]">A&S</span>{" "}
+                  <span className="text-[#e8621a]">AS</span>{" "}
                   <span className="text-[#1a3a5c]">Gebäudetechnik</span>
                 </span>
                 <span className="text-[10px] uppercase tracking-widest text-[#718096] font-medium">

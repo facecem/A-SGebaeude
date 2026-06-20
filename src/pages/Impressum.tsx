@@ -6,7 +6,7 @@ import { useSeo } from "@/hooks/useSeo";
 export default function Impressum() {
   useSeo({
     title: "Impressum",
-    description: "Impressum der A&S Gebäudetechnik GmbH gemäß § 5 TMG.",
+    description: "Impressum der AS Gebäudetechnik GmbH gemäß § 5 TMG.",
     path: "/impressum",
   });
   const [, setLocation] = useLocation();
@@ -33,7 +33,7 @@ export default function Impressum() {
           </div>
 
           <h2 className="font-serif text-xl text-[#1a3a5c] mt-8 mb-3">Unternehmensangaben</h2>
-          <p className="text-[#4a5568] font-light text-sm mb-2">A&S Gebäudetechnik GmbH</p>
+          <p className="text-[#4a5568] font-light text-sm mb-2">AS Gebäudetechnik GmbH</p>
           <p className="text-[#4a5568] font-light text-sm mb-2">Geschäftsführer: Abdoul R. Shawisch</p>
           <p className="text-[#4a5568] font-light text-sm mb-1">Standort Herzogenrath:</p>
           <p className="text-[#4a5568] font-light text-sm mb-2">Eurode-Park 1-4, 52134 Herzogenrath</p>

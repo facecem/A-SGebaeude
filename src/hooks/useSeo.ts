@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const SITE_URL = "https://www.as-gebaeudetechnik.de";
-const SITE_NAME = "A&S Gebäudetechnik GmbH";
+const SITE_NAME = "AS Gebäudetechnik GmbH";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
   let el = document.querySelector(`meta[${attr}="${key}"]`);
