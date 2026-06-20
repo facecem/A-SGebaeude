@@ -20,7 +20,7 @@ export default function Footer() {
   const [, setLocation] = useLocation();
   const navigate = (href: string) => {
     setLocation(href);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "auto" }), 50);
   };
 
   return (

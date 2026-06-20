@@ -28,7 +28,10 @@ export default function Navbar() {
   const navigate = (href: string) => {
     setLocation(href);
     setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Deferred + instant: on mobile the menu-close animation can swallow an
+    // immediate smooth scroll, leaving the new page mid-scroll. Running it
+    // after the close transition (and the route change) settles fixes that.
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "auto" }), 50);
   };
 
   return (
