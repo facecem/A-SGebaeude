@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.claude/
+fav_b64.txt
+fav32_only.txt
+*.log
+.DS_Store
