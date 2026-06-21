@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import { useSeo } from "@/hooks/useSeo";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 
 export default function Impressum() {
   useSeo({
@@ -42,7 +43,9 @@ export default function Impressum() {
 
           <h2 className="font-serif text-xl text-[#1a3a5c] mt-8 mb-3">Kontakt</h2>
           <p className="text-[#4a5568] font-light text-sm mb-2">Telefon: +49 176 3044 75 14</p>
-          <p className="text-[#4a5568] font-light text-sm mb-2">E-Mail: info@as-versorgung.de</p>
+          <p className="text-[#4a5568] font-light text-sm mb-2 flex gap-1">
+            E-Mail: <ObfuscatedEmail user="anfrage" domain="as-versorgung.de" />
+          </p>
 
           <h2 className="font-serif text-xl text-[#1a3a5c] mt-8 mb-3">Handelsregister</h2>
           <p className="text-[#4a5568] font-light text-sm mb-2">Registergericht: Amtsgericht Aachen</p>

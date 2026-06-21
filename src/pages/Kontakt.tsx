@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, AlertTriangle, Send, CheckCircle } from "lucide-react";
 import { useSeo } from "@/hooks/useSeo";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 
 const hours = [
   { day: "Montag–Freitag", time: "07:30 – 17:00 Uhr" },
@@ -51,28 +52,43 @@ export default function Kontakt() {
           className="space-y-6"
         >
           {[
-            { Icon: Phone, label: "+49 176 3044 75 14", sub: "Direkter Anruf", href: "tel:+4917630447514" },
-            { Icon: Mail, label: "info@as-versorgung.de", sub: "E-Mail senden", href: "mailto:info@as-versorgung.de" },
-            { Icon: MapPin, label: "Eurode-Park 1-4, 52134 Herzogenrath", sub: "Standort Herzogenrath", href: "#" },
-            { Icon: MapPin, label: "Im Mediapark 8, 50670 Köln", sub: "Standort Köln", href: "#" },
-          ].map(({ Icon, label, sub, href }) => (
-            <a
-              key={label}
-              href={href}
-              data-testid={`link-kontakt-${sub.toLowerCase().replace(/\s/g, "-")}`}
-              className="flex gap-5 items-start group"
-            >
-              <div className="w-12 h-12 bg-[#e8f0f9] flex items-center justify-center flex-shrink-0 group-hover:bg-[#e8621a] transition-colors duration-300">
-                <Icon className="h-5 w-5 text-[#1a3a5c] group-hover:text-white transition-colors" />
+            { Icon: Phone, label: "+49 176 3044 75 14", sub: "Direkter Anruf", href: "tel:+4917630447514", isEmail: false },
+            { Icon: Mail, label: null, sub: "E-Mail senden", href: "#", isEmail: true },
+            { Icon: MapPin, label: "Eurode-Park 1-4, 52134 Herzogenrath", sub: "Standort Herzogenrath", href: "#", isEmail: false },
+            { Icon: MapPin, label: "Im Mediapark 8, 50670 Köln", sub: "Standort Köln", href: "#", isEmail: false },
+          ].map(({ Icon, label, sub, href, isEmail }, i) => {
+            const inner = (
+              <>
+                <div className="w-12 h-12 bg-[#e8f0f9] flex items-center justify-center flex-shrink-0 group-hover:bg-[#e8621a] transition-colors duration-300">
+                  <Icon className="h-5 w-5 text-[#1a3a5c] group-hover:text-white transition-colors" />
+                </div>
+                <div>
+                  {isEmail ? (
+                    <ObfuscatedEmail user="anfrage" domain="as-versorgung.de" className="block text-[#1a3a5c] text-base group-hover:text-[#e8621a] transition-colors font-bold" />
+                  ) : (
+                    <strong className="block text-[#1a3a5c] text-base group-hover:text-[#e8621a] transition-colors">
+                      {label}
+                    </strong>
+                  )}
+                  <span className="text-[#718096] text-sm">{sub}</span>
+                </div>
+              </>
+            );
+            return isEmail ? (
+              <div key={i} data-testid={`link-kontakt-${sub.toLowerCase().replace(/\s/g, "-")}`} className="flex gap-5 items-start group">
+                {inner}
               </div>
-              <div>
-                <strong className="block text-[#1a3a5c] text-base group-hover:text-[#e8621a] transition-colors">
-                  {label}
-                </strong>
-                <span className="text-[#718096] text-sm">{sub}</span>
-              </div>
-            </a>
-          ))}
+            ) : (
+              <a
+                key={i}
+                href={href}
+                data-testid={`link-kontakt-${sub.toLowerCase().replace(/\s/g, "-")}`}
+                className="flex gap-5 items-start group"
+              >
+                {inner}
+              </a>
+            );
+          })}
 
           {/* Opening hours */}
           <div className="bg-[#f5f6f8] p-6 mt-4">
@@ -105,14 +121,24 @@ export default function Kontakt() {
             </div>
           </div>
 
-          {/* Map placeholder */}
-          <div
-            className="h-52 border-2 border-dashed border-[#e2e6ea] flex flex-col items-center justify-center gap-3 text-center p-6 text-[#718096]"
-            data-testid="map-placeholder"
-          >
-            <MapPin className="h-10 w-10 opacity-30" />
-            <p className="text-sm">Karte wird geladen …</p>
-            <p className="text-xs opacity-60">Eurode-Park 1-4, 52134 Herzogenrath</p>
+          {/* Maps */}
+          <div className="space-y-3">
+            <div className="overflow-hidden border border-[#e2e6ea]" data-testid="map-herzogenrath">
+              <iframe
+                title="Karte: Standort Herzogenrath"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=6.0867%2C50.8694%2C6.1067%2C50.8794&layer=mapnik&marker=50.8744%2C6.0967"
+                className="w-full h-44 border-0"
+                loading="lazy"
+              />
+            </div>
+            <div className="overflow-hidden border border-[#e2e6ea]" data-testid="map-koeln">
+              <iframe
+                title="Karte: Standort Köln"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=6.9418%2C50.9576%2C6.9618%2C50.9676&layer=mapnik&marker=50.9626%2C6.9518"
+                className="w-full h-44 border-0"
+                loading="lazy"
+              />
+            </div>
           </div>
         </motion.div>
 

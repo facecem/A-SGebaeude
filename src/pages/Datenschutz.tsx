@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import { useSeo } from "@/hooks/useSeo";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 
 export default function Datenschutz() {
   useSeo({
@@ -40,7 +41,8 @@ export default function Datenschutz() {
           <h2 className="font-serif text-xl text-[#1a3a5c] mt-8 mb-3">1. Verantwortlicher</h2>
           <p className="text-[#4a5568] font-light text-sm leading-relaxed mb-3">
             Verantwortlich im Sinne der Datenschutz-Grundverordnung (DSGVO) ist: AS Gebäudetechnik
-            GmbH, Eurode-Park 1-4, 52134 Herzogenrath, info@as-versorgung.de
+            GmbH, Eurode-Park 1-4, 52134 Herzogenrath,{" "}
+            <ObfuscatedEmail user="anfrage" domain="as-versorgung.de" />
           </p>
 
           <h2 className="font-serif text-xl text-[#1a3a5c] mt-8 mb-3">2. Hosting</h2>

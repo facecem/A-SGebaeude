@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useScrollReveal, useCountUp } from "@/hooks/useScrollReveal";
 import { useSeo } from "@/hooks/useSeo";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 
 const slides = [
   {
@@ -447,13 +448,17 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row flex-wrap gap-6 items-start sm:items-center justify-between">
           {[
             { Icon: Phone, label: "+49 176 3044 75 14", sub: "Mo–Fr 07:30–17:00 Uhr" },
-            { Icon: Mail, label: "info@as-versorgung.de", sub: "Antwort innerhalb 24h" },
+            { Icon: Mail, label: null, sub: "Antwort innerhalb 24h" },
             { Icon: MapPin, label: "Herzogenrath · Köln", sub: "Servicegebiet: Aachen, Düren, Heinsberg, Köln" },
-          ].map(({ Icon, label, sub }) => (
-            <div key={label} className="flex items-center gap-4 text-white">
+          ].map(({ Icon, label, sub }, i) => (
+            <div key={i} className="flex items-center gap-4 text-white">
               <Icon className="h-6 w-6 opacity-75 flex-shrink-0" />
               <div>
-                <strong className="block text-sm font-bold">{label}</strong>
+                {label ? (
+                  <strong className="block text-sm font-bold">{label}</strong>
+                ) : (
+                  <ObfuscatedEmail user="anfrage" domain="as-versorgung.de" className="block text-sm font-bold" />
+                )}
                 <span className="text-xs opacity-70">{sub}</span>
               </div>
             </div>

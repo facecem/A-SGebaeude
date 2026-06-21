@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 import { useSeo } from "@/hooks/useSeo";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 
 export default function Anfrage() {
   useSeo({
@@ -64,16 +65,20 @@ export default function Anfrage() {
           <div className="space-y-7">
             {[
               { Icon: Phone, label: "+49 176 3044 75 14", sub: "Mo–Fr 07:30–17:00 Uhr" },
-              { Icon: Mail, label: "info@as-versorgung.de", sub: "Antwort innerhalb 24h" },
+              { Icon: Mail, label: null, sub: "Antwort innerhalb 24h" },
               { Icon: MapPin, label: "Herzogenrath · Köln", sub: "Servicegebiet: Aachen, Düren, Heinsberg, Köln, Mönchengladbach" },
               { Icon: Clock, label: "24/7 Notdienst", sub: "Heizungsausfall oder Rohrbruch?" },
-            ].map(({ Icon, label, sub }) => (
-              <div key={label} className="flex gap-4 items-start">
+            ].map(({ Icon, label, sub }, i) => (
+              <div key={i} className="flex gap-4 items-start">
                 <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-[#e8621a]/20 border border-[#e8621a]/30">
                   <Icon className="h-4 w-4 text-[#e8621a]" />
                 </div>
                 <div>
-                  <strong className="block text-white text-sm font-semibold">{label}</strong>
+                  {label ? (
+                    <strong className="block text-white text-sm font-semibold">{label}</strong>
+                  ) : (
+                    <ObfuscatedEmail user="anfrage" domain="as-versorgung.de" className="block text-white text-sm font-semibold" />
+                  )}
                   <span className="text-white/45 text-xs">{sub}</span>
                 </div>
               </div>

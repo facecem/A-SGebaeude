@@ -3,6 +3,11 @@ import { useLocation } from "wouter";
 import { Snowflake, Leaf, Wallet, Wrench, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useSeo } from "@/hooks/useSeo";
+import vaillantLogo from "@/assets/brands/vaillant.svg";
+import viessmannLogo from "@/assets/brands/viessmann.svg";
+import buderusLogo from "@/assets/brands/buderus.svg";
+import boschLogo from "@/assets/brands/bosch.svg";
+import stiebelEltronLogo from "@/assets/brands/stiebel-eltron.svg";
 
 const benefits = [
   {
@@ -22,7 +27,13 @@ const benefits = [
   },
 ];
 
-const brands = ["Vaillant", "Viessmann", "Buderus", "Bosch", "Stiebel Eltron"];
+const brands = [
+  { name: "Vaillant", logo: vaillantLogo },
+  { name: "Viessmann", logo: viessmannLogo },
+  { name: "Buderus", logo: buderusLogo },
+  { name: "Bosch", logo: boschLogo },
+  { name: "Stiebel Eltron", logo: stiebelEltronLogo },
+];
 
 const types = [
   {
@@ -174,15 +185,15 @@ export default function Waermepumpen() {
             <h2 className="font-serif text-4xl text-[#1a3a5c] mb-8">
               Wir setzen auf bekannte Hersteller
             </h2>
-            <div className="flex flex-wrap justify-center gap-3">
-              {brands.map((brand) => (
-                <span
-                  key={brand}
-                  className="bg-white border border-[#e2e6ea] text-[#1a3a5c] px-6 py-3 text-sm font-semibold tracking-wide"
-                  data-testid={`badge-brand-${brand.toLowerCase().replace(/\s/g, "-")}`}
+            <div className="flex flex-wrap justify-center items-center gap-6">
+              {brands.map(({ name, logo }) => (
+                <div
+                  key={name}
+                  className="bg-white border border-[#e2e6ea] px-7 py-5 flex items-center justify-center h-20 w-40"
+                  data-testid={`badge-brand-${name.toLowerCase().replace(/\s/g, "-")}`}
                 >
-                  {brand}
-                </span>
+                  <img src={logo} alt={`${name} Logo`} className="max-h-9 max-w-full object-contain" />
+                </div>
               ))}
             </div>
           </motion.div>

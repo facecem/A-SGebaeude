@@ -1,6 +1,7 @@
 import { useLocation } from "wouter";
 import { Phone, Mail, MapPin } from "lucide-react";
 import logoIcon from "@/assets/logo-icon.png";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 
 const services = [
   "Heizungsanlagen",
@@ -14,6 +15,8 @@ const company = [
   { label: "Über uns", href: "/ueber" },
   { label: "Anfrage stellen", href: "/anfrage" },
   { label: "Kontakt", href: "/kontakt" },
+  { label: "Impressum", href: "/impressum" },
+  { label: "Datenschutz", href: "/datenschutz" },
 ];
 
 export default function Footer() {
@@ -95,7 +98,7 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-2 text-white/45 text-sm">
               <Mail className="h-4 w-4 text-[#e8621a] mt-0.5 flex-shrink-0" />
-              <span>info@as-versorgung.de</span>
+              <ObfuscatedEmail user="anfrage" domain="as-versorgung.de" className="hover:text-[#f07840] transition-colors" />
             </li>
             <li className="flex items-start gap-2 text-white/45 text-sm">
               <MapPin className="h-4 w-4 text-[#e8621a] mt-0.5 flex-shrink-0" />
@@ -110,26 +113,10 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-3">
-        <p className="text-white/30 text-xs">
+      <div className="border-t border-white/10 max-w-6xl mx-auto px-6 py-5">
+        <p className="text-white/30 text-xs text-center sm:text-left">
           © 2025 AS Gebäudetechnik GmbH. Alle Rechte vorbehalten.
         </p>
-        <div className="flex gap-5">
-          <button
-            onClick={() => navigate("/impressum")}
-            data-testid="link-footer-impressum"
-            className="text-white/35 text-xs hover:text-[#f07840] transition-colors"
-          >
-            Impressum
-          </button>
-          <button
-            onClick={() => navigate("/datenschutz")}
-            data-testid="link-footer-datenschutz"
-            className="text-white/35 text-xs hover:text-[#f07840] transition-colors"
-          >
-            Datenschutz
-          </button>
-        </div>
       </div>
     </footer>
   );
