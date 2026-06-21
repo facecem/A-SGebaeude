@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { useSeo } from "@/hooks/useSeo";
 import ObfuscatedEmail from "@/components/ObfuscatedEmail";
+import { submitForm } from "@/lib/submitForm";
 
 export default function Anfrage() {
   useSeo({
@@ -11,14 +12,24 @@ export default function Anfrage() {
     path: "/anfrage",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
   const [form, setForm] = useState({
     vorname: "", nachname: "", email: "", telefon: "",
-    leistung: "", betreff: "", nachricht: "", datenschutz: false,
+    leistung: "", betreff: "", nachricht: "", datenschutz: false, website: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setError(false);
+    const result = await submitForm({ ...form, form_type: "anfrage" });
+    setSending(false);
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -109,6 +120,28 @@ export default function Anfrage() {
           ) : (
             <form onSubmit={handleSubmit} data-testid="form-anfrage">
               <h3 className="font-serif text-2xl text-[#1a3a5c] mb-8">Ihre Anfrage</h3>
+
+              {/* Honeypot: hidden from real users, bots tend to fill every field */}
+              <input
+                type="text"
+                name="website"
+                value={form.website}
+                onChange={(e) => setForm({ ...form, website: e.target.value })}
+                tabIndex={-1}
+                autoComplete="off"
+                className="absolute w-0 h-0 opacity-0 -z-10"
+                aria-hidden="true"
+              />
+
+              {error && (
+                <div className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 mb-5">
+                  <AlertCircle className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                  <span>
+                    Beim Senden ist etwas schiefgelaufen. Bitte versuchen Sie es erneut oder rufen
+                    Sie uns direkt an.
+                  </span>
+                </div>
+              )}
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                 <div className="flex flex-col gap-1.5">
@@ -236,10 +269,12 @@ export default function Anfrage() {
                 <span className="text-xs text-[#718096]">* Pflichtfelder</span>
                 <button
                   type="submit"
+                  disabled={sending}
                   data-testid="button-submit-anfrage"
-                  className="group inline-flex items-center gap-2 px-8 py-3.5 bg-[#e8621a] hover:bg-[#f07840] text-white text-sm font-semibold uppercase tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#e8621a]/30"
+                  className="group inline-flex items-center gap-2 px-8 py-3.5 bg-[#e8621a] hover:bg-[#f07840] disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-semibold uppercase tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#e8621a]/30"
                 >
-                  Anfrage senden <Send className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                  {sending ? "Wird gesendet …" : "Anfrage senden"}
+                  {!sending && <Send className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />}
                 </button>
               </div>
             </form>
