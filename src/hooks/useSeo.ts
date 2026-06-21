@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const SITE_URL = "https://www.as-gebaeudetechnik.de";
+const SITE_URL = "https://www.as-versorgung.de";
 const SITE_NAME = "AS Gebäudetechnik GmbH";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {

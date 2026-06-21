@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.as-gebaeudetechnik.de/sitemap.xml
+Sitemap: https://www.as-versorgung.de/sitemap.xml
